@@ -12,12 +12,12 @@ export const routes: TNavigation[] = [
     component: Home,
   },
   {
-    label: 'Docs',
+    label: 'Documentation',
     path: '/docs',
     component: Docs,
   },
   {
-    label: 'playground',
+    label: 'API Playground',
     path: '/playground',
     component: Playground,
   },
