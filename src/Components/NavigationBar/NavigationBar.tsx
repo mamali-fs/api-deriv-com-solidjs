@@ -21,7 +21,7 @@ export const NavigationBar: Component = () => {
             <h1 class='inline ml-6 text-2xl'>API</h1>
             </NavLink>
           <nav id="navbar" class="flex-container navbar ml-5% flex flex-row">
-              {navs().map(n => <NavLink activeClass="before:active-page before:navigation-transition" href={n.path} class="relative text-base mr-10 text-white before:active-page hover:before:navigation-transition" end>{n.label}</NavLink>)}
+              {navs().map(n => <NavLink activeClass="after:active-page after:navigation-transition" href={n.path} class="relative text-base mr-10 text-white before:active-page hover:before:navigation-transition" end>{n.label}</NavLink>)}
           </nav>
         </section>
       </header>
