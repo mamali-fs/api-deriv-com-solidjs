@@ -8,30 +8,19 @@ const data = {
 }
 
 
-const Request: Component = ({sendMessage}) => {
-    const [fields, setFields] = createStore({ request: JSON.stringify(data) });
+const Request: Component = () => {
+    const [fields, setFields] = createStore({ request: '' });
     const fn = (form) => {
-        // form.submit()
         console.log("Done", form);
     };
-
-    // const formSubmit = async (ref) => {
-    //     ref.setAttribute("novalidate", "");
-    //     ref.onsubmit = async (e) => {
-    //         e.preventDefault();
-    //         await WS.sendMessage({
-    //             'residence_list': 1
-    //           });
-    //     };
-    // }
 
     const formSubmit = async (ref) => {
         ref.setAttribute("novalidate", "");
         ref.onsubmit = async (e) => {
             e.preventDefault();
-            await sendMessage({
+            await WS.sendMessage({
                 'residence_list': 1
-              });
+            });
         };
     }
 
