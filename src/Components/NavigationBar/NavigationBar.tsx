@@ -11,7 +11,7 @@ export const NavigationBar: Component = () => {
     const [docsNav] = docsNavSignal;
 
     return (
-        <div class='bg-[#0e0e0e] w-full flex flex-col desktop:items-center '>
+        <div aria-label="Deriv API Navigation" class='bg-[#0e0e0e] w-full flex flex-col desktop:items-center '>
             <div class='inner-shadow w-full h-8 flex items-center mobile:hidden'>
                 <div class='text-white-gray w-4/5 text-xs my-0 mx-auto'>
                     <a class='pr-10' href="https://deriv.com">Deriv website</a>
@@ -28,7 +28,7 @@ export const NavigationBar: Component = () => {
                     </NavLink>
                     <nav class="flex flex-row ml-5% mobile:hidden">
                         <For each={navs()}>
-                            {(item) => <NavLink activeClass="after:active-page after:navigation-transition" href={item.path} class="relative text-base mr-10 text-white before:active-page hover:before:navigation-transition" end={item.path === "/"}>{item.label}</NavLink>}
+                            {(item) => <NavLink aria-label={`Go to ${item.label}`} activeClass="after:active-page after:navigation-transition" href={item.path} class="relative text-base mr-10 text-white before:active-page hover:before:navigation-transition" end={item.path === "/"}>{item.label}</NavLink>}
                         </For>
                     </nav>
                 </section>
