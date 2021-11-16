@@ -5,7 +5,8 @@ import { screen, render } from 'solid-testing-library';
 describe('Home Page: "/"', () => {
     it("Renders successfully", async () => {
         render(() => <Home />);
-        const component = await screen.findByTestId('home-page');
+        // screen find by text
+        const component = await screen.findByText("Deriv API");
         expect(component).toBeInTheDocument()
     })
 })
