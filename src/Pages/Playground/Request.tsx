@@ -44,7 +44,7 @@ const Request: Component = () => {
         <div>
             <textarea 
                 placeholder="Request JSON"
-                value={fields.request} 
+                value={JSON.stringify(fields.request)} 
                 onInput={(e) => setFields("request", e.target.value)}
             ></textarea>
             <button>Reset Connection</button>
