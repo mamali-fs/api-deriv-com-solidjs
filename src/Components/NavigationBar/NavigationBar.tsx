@@ -1,15 +1,15 @@
 import { NavLink } from 'solid-app-router';
 import type { Component } from 'solid-js'
 import { docsNavSignal, navSignal } from '../../Store/navigation-bar-store'
-import { createSignal } from 'solid-js';
-import { Show } from 'solid-js'
+import { createSignal, Show, For } from 'solid-js';
+
 
 export const NavigationBar: Component = () => {
     const [showDocumentationItems, setShowDocumentationItems] = createSignal(false);
     const [showMobileNav, setShowMobileNav] = createSignal(false);
     const [navs] = navSignal;
     const [docsNav] = docsNavSignal;
-    const docs_nav = docsNav().map(item => <NavLink activeClass="before:mobile-nav-after" class="flex relative justify-start items-center py-2.5 pr-4 pl-2 mb-1.5 text-sm" href={item.path} end>{item.label}</NavLink>)
+
     return (
         <div class='bg-[#0e0e0e] w-full flex flex-col desktop:items-center '>
             <div class='inner-shadow w-full h-8 flex items-center mobile:hidden'>
@@ -27,34 +27,39 @@ export const NavigationBar: Component = () => {
                         <h1 class='inline ml-6 text-2xl  mobile:text-base mobile:ml-2'>API</h1>
                     </NavLink>
                     <nav class="flex flex-row ml-5% mobile:hidden">
-                        {navs().map(n => <NavLink activeClass="after:active-page after:navigation-transition" href={n.path} class="relative text-base mr-10 text-white before:active-page hover:before:navigation-transition" end={n.path === "/"}>{n.label}</NavLink>)}
+                        <For each={navs()}>
+                            {(item) => <NavLink activeClass="after:active-page after:navigation-transition" href={item.path} class="relative text-base mr-10 text-white before:active-page hover:before:navigation-transition" end={item.path === "/"}>{item.label}</NavLink>}
+                        </For>
                     </nav>
                 </section>
             </header>
             <section class={`fixed bg-white top-[48px] h-[calc(100%+54px) w-[253px] overflow-hidden left-[-254px] text-base	burger ${showMobileNav() && "transition-left"}`}>
                 <div class="flex flex-col h-full py-6 pr-4 pl-5">
                     <div class="menu-wrapper">
-                        {navs().map(n => {
-                            if (n.path === "/docs")
-                                return (<div class="py-2.5 px-2">
-                                    <div class="font-bold px-4 items-center	" onclick={() => {
-                                        setShowDocumentationItems(!showDocumentationItems())
-                                    }}>
-                                        {n.label}
-                                        <img width="16" height="16" class="float-right" src="/src/assets/arrow_down.svg" />
+                        <For each={navs()}>
+                            {(item, index) => <>
+                                <Show data-index={index} when={item.path === "/docs"}>
+                                    <div class="py-2.5 px-2">
+                                        <div class="font-bold px-4 items-center	" onclick={() => {
+                                            setShowDocumentationItems(!showDocumentationItems())
+                                        }}>
+                                            {item.label}
+                                            <img width="16" height="16" class="float-right" src="/src/assets/arrow_down.svg" />
+                                        </div>
+                                        <Show when={showDocumentationItems()}><div class="px-4">
+                                            <For each={docsNav()}>{(item, index) => <NavLink data-index={index} activeClass="before:mobile-nav-after" class="flex relative justify-start items-center py-2.5 pr-4 pl-2 mb-1.5 text-sm" href={item.path} end>{item.label}</NavLink>}</For>
+                                        </div></Show>
                                     </div>
-                                    <Show when={showDocumentationItems()}><div class="px-4">{docs_nav}</div></Show>
-                                </div>
-                                )
-                            else
-                                return (
-                                    <div class="py-2.5 px-2 align-middle">
-                                        <NavLink activeClass="before:mobile-nav-after " class="font-bold flex relative items-center px-4" href={n.path} end>{n.label}</NavLink>
-                                    </div>
-                                )
-                        }
-                        )}
+                                </Show>
+                                <Show when={item.path !== "/docs"}>
 
+                                    <div class="py-2.5 px-2 align-middle">
+                                        <NavLink activeClass="before:mobile-nav-after " class="font-bold flex relative items-center px-4" href={item.path} end>{item.label}</NavLink>
+                                    </div>
+                                </Show>
+                            </>
+                            }
+                        </For>
                     </div>
                 </div>
             </section>
