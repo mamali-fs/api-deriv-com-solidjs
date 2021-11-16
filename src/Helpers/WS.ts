@@ -24,14 +24,11 @@ function waitForOpenSocket(socket) {
 async function sendMessage(request): Promise<void> {
   await waitForOpenSocket(socket);
   socket.send(JSON.stringify(request));
-  // @TODO: add to stack
+  pushData(JSON.stringify(request))
 }
 
 function handleMessage(event) {
   const data = JSON.parse(event.data);
-  // @TODO: add to stack
-  console.log('data', data);
-  console.log('signal', pushData);
   pushData(event.data)
 }
 

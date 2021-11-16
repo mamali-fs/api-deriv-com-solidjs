@@ -1,27 +1,28 @@
 import type { Component } from 'solid-js';
-import {createEffect} from 'solid-js';
+import {createEffect, createSignal} from 'solid-js';
 import { createStore } from 'solid-js/store';
 import Request from './Request';
 import WS from '../../Helpers/WS';
+import { Conversation } from './Conversation';
 
 export const Playground: Component = () => {
-    const [state, setState] = createStore({reqs: []});
+    const [reqs, addReqs] = createSignal([]);
+
+    const addToReqs = (value) => {
+        return addReqs([...reqs(), value]);
+      };
 
     createEffect(() => {
         WS.init((item: string) => {
-            setState('reqs', [...state.reqs, item])
-            console.log('pushhhhhh')
+            addToReqs(item)
         });
-        console.log('effect');
     });
-
-    console.log('state', state.reqs);
 
     return (
         <div data-testid="playground-page">
             <h1>Playground page</h1>
             <Request />
-            {state.reqs}
+            <Conversation data={reqs} />
         </div>
     )
 }
