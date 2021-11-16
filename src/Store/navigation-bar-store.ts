@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
 import type { Component } from 'solid-js';
-import { routes } from './routes';
+import {docs_routes, routes} from './routes';
 import { RouteProps } from 'solid-app-router';
 
 export type TNavigation = RouteProps & {
@@ -11,3 +11,4 @@ export type TNavigation = RouteProps & {
 };
 
 export const navSignal = createSignal(routes);
+export const docsNavSignal = createSignal(docs_routes)
