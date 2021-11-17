@@ -11,7 +11,6 @@ const App: Component = () => {
     <>
       <Router>
         <NavigationBar />
-        <div>General items</div>
         <Routes />
         <footer>Footer goes here</footer>
       </Router>
