@@ -7,8 +7,8 @@ export const Conversation: Component = ({ data }) => {
     });
 
     return (
-        <div>
+        <section>
             {data()}
-        </div>
+        </section>
     );
 }

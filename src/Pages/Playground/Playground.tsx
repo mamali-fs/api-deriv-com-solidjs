@@ -21,8 +21,10 @@ export const Playground: Component = () => {
     return (
         <div data-testid="playground-page">
             <h1>Playground page</h1>
-            <Request />
-            <Conversation data={reqs} />
+            <main className="px-4">
+                <Request />
+                <Conversation data={reqs} />
+            </main>
         </div>
     )
 }
