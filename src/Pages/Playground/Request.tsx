@@ -6,7 +6,7 @@ const defaultReq = {
     'residence_list': 1
 }
 
-const Request: Component = () => {
+const Request: Component = ({resetReqs}) => {
     const [fields, setFields] = createStore({ request: defaultReq });
 
     const submit = async () => {
@@ -22,7 +22,7 @@ const Request: Component = () => {
                 className="w-full h-40 bg-gray-900 text-gray-100 resize-none"
             ></textarea>
             <div className="pt-6 flex justify-center items-center">
-                <button className="px-4	py-2 rounded-md border-2 border-gray-400 text-white mr-1    ">Reset Connection</button>
+                <button onClick={resetReqs} className="px-4	py-2 rounded-md border-2 border-gray-400 text-white mr-1    ">Reset Connection</button>
                 <button onClick={submit} className="px-4 py-2 rounded-md bg-red-400 border-2 border-red-500 text-white ml-1">Send Request</button>
             </div>
         </section>

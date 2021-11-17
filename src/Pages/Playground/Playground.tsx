@@ -6,11 +6,15 @@ import WS from '../../Helpers/WS';
 import { Conversation } from './Conversation';
 
 export const Playground: Component = () => {
-    const [reqs, addReqs] = createSignal([]);
+    const [reqs, setReqs] = createSignal([]);
 
     const addToReqs = (value) => {
-        return addReqs([...reqs(), value]);
-      };
+        return setReqs([...reqs(), value]);
+    };
+
+    const resetReqs = () => {
+        return setReqs([]);
+    };
 
     createEffect(() => {
         WS.init((item: string) => {
@@ -22,7 +26,7 @@ export const Playground: Component = () => {
         <div data-testid="playground-page">
             <h1>Playground page</h1>
             <main className="px-4">
-                <Request />
+                <Request resetReqs={resetReqs}/>
                 <Conversation data={reqs} />
             </main>
         </div>
