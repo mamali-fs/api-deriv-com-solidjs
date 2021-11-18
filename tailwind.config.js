@@ -4,6 +4,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundImage: {
+        'arrow-left': "url('/src/assets/arrow_left.svg')",
+        'arrow-right': "url('/src/assets/arrow_right.svg')",
+      },
       colors: {
         "white-gray": "#c2c2c2"
       },
