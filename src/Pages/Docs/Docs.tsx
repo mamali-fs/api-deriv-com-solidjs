@@ -6,7 +6,7 @@ import { docs_routes } from "../../Store/routes";
 export const Docs: Component = () => {
   const Routes = useRoutes(docs_routes);
   return (
-    <div class="flex pt-20 pb-32 mobile:hidden">
+    <div class="flex pt-20 pb-32 h-screen mobile:hidden">
       <Router>
         <SideBar />
         <Routes />
