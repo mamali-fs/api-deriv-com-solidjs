@@ -1,10 +1,24 @@
 /* ./src/index.css */
+@font-face {
+    font-family: 'ibm plex sans';
+    src: url("/src/assets/ibm-plex-sans-normal.woff2");
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'ibm plex sans';
+    src: url("/src/assets/ibm-plex-sans-bold.woff2");
+    font-weight: bold;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 div.code {
     white-space: pre;
+}
+
+* {
+    font-family: ibm plex sans, sans-serif;
 }
 
 @layer utilities {

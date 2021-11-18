@@ -1,6 +1,12 @@
 import type { Component } from 'solid-js'
-import HomeSlider from '../../Components/HomeSlider'
+import HomeSlider from '../../Components/HomeSlider';
+import ComprehensiveRow from './ComprehensiveRow';
+import Hero from './Hero';
 
 export const Home: Component = () => (
-    <div data-testid="home-page"><HomeSlider/></div>
+    <div class="flex flex-col overflow-hidden">
+        <Hero />
+        <HomeSlider />
+        <ComprehensiveRow />
+    </div>
 )
