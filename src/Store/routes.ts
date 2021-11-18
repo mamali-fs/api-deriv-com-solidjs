@@ -1,56 +1,63 @@
-import { lazy } from 'solid-js';
-import { TNavigation } from './navigation-bar-store';
+import { lazy } from "solid-js";
+import { TNavigation } from "./side-bar-store";
 
-const Docs = lazy(() => import('../Pages/Docs/index'));
-const Home = lazy(() => import('../Pages/Home/index'));
-const Playground = lazy(() => import('../Pages/Playground/index'));
-const NotFound = lazy(()=> import("../Pages/NotFound/index"))
+const Docs = lazy(() => import("../Pages/Docs/index"));
+const Home = lazy(() => import("../Pages/Home/index"));
+const Playground = lazy(() => import("../Pages/Playground/index"));
+const NotFound = lazy(() => import("../Pages/NotFound/index"));
 
 export const routes: TNavigation[] = [
   {
-    label: 'Home',
-    path: '/',
+    label: "Home",
+    path: "/",
     component: Home,
   },
   {
-    label: 'Documentation',
-    path: '/docs',
+    label: "Documentation",
+    path: "/docs",
     component: Docs,
   },
   {
-    label: 'API Playground',
-    path: '/playground',
+    label: "API Playground",
+    path: "/playground",
     component: Playground,
   },
 ];
 
-export const docs_routes: TNavigation[]=[{
-  label: 'Quick Start',
-  path: '/docs',
-  component: NotFound,
-},
+export const docs_routes: TNavigation[] = [
   {
-    label: 'App Registration',
-    path: '/docs/app-registration',
+    label: "Quickstart",
+    path: "/docs",
     component: NotFound,
   },
   {
-    label: 'API Guide',
-    path: '/docs/api-guide',
+    label: "App registration",
+    path: "/docs/app-registration",
     component: NotFound,
   },
   {
-    label: 'FAQ',
-    path: '/docs/faq',
+    label: "API playground",
+    path: "/playground",
     component: NotFound,
   },
   {
-    label: 'JSON Schemas',
-    path: '/docs/json-schemas',
+    label: "API guid",
+    path: "/docs/api-guide",
     component: NotFound,
   },
   {
-    label: 'Bug Bounty',
-    path: '/docs/bug-bounty',
+    label: "FAQ",
+    path: "/docs/faq",
     component: NotFound,
-  }]
+  },
+  {
+    label: "JSON schemas",
+    path: "/docs/json-schemas",
+    component: NotFound,
+  },
+  {
+    label: "Bug Bounty",
+    path: "/docs/bug-bounty",
+    component: NotFound,
+  },
+];
