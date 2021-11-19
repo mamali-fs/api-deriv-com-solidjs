@@ -3,9 +3,12 @@ module.exports = {
   purge: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    maxHeight: {
+      '60vh': '60vh'
+     },
     extend: {
       colors: {
-        "white-gray": "#c2c2c2"
+        "white-gray": "#c2c2c2",
       },
       spacing: {
         "5%": "5%"
