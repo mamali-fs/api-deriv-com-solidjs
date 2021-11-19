@@ -2,11 +2,12 @@ import { lazy } from "solid-js";
 import { TNavigation } from "./side-bar-store";
 
 const Docs = lazy(() => import("../Pages/Docs/index"));
+const QuickStart = lazy(() => import("../Pages/QuickStart/index"));
 const Home = lazy(() => import("../Pages/Home/index"));
 const Playground = lazy(() => import("../Pages/Playground/index"));
 const NotFound = lazy(() => import("../Pages/NotFound/index"));
 
-export const routes: TNavigation[] = [
+export const routes: any[] = [
   {
     label: "Home",
     path: "/",
@@ -24,11 +25,13 @@ export const routes: TNavigation[] = [
   },
 ];
 
-export const docs_routes: TNavigation[] = [
+export const 
+
+docs_routes: any[] = [
   {
     label: "Quickstart",
     path: "/docs",
-    component: NotFound,
+    component: QuickStart,
   },
   {
     label: "App registration",
