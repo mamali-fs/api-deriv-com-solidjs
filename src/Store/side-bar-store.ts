@@ -1,15 +1,9 @@
-import { createSignal } from "solid-js";
-import type { Component } from "solid-js";
-import { RouteProps } from "solid-app-router";
-import { docs_routes } from "./routes";
+import type { RouteDefinition } from "solid-app-router";
 
-export type TNavigation = RouteProps & {
+export type TNavigation = RouteDefinition & {
   icon?: string;
+  is_root_path?: boolean;
   label: string;
-  path: string;
-  component: Component;
 };
 
-const navSignal = createSignal(docs_routes);
 
-export { navSignal };

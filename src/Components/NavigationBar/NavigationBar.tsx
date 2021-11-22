@@ -1,6 +1,6 @@
 import { NavLink } from "solid-app-router";
 import type { Component } from "solid-js";
-import { docsNavSignal, navSignal } from "../../Store/navigation-bar-store";
+import { docsNavSignal, navMemo } from "../../Store/navigation-bar-store";
 import { createSignal, Show, For } from "solid-js";
 import arrowDownUrl from "../../assets/arrow_down.svg";
 import closeSVGUrl from "../../assets/close.svg";
@@ -11,7 +11,7 @@ export const NavigationBar: Component = () => {
   const [showDocumentationItems, setShowDocumentationItems] =
     createSignal(false);
   const [showMobileNav, setShowMobileNav] = createSignal(false);
-  const [navs] = navSignal;
+  const navs = navMemo;
   const [docsNav] = docsNavSignal;
 
   return (
