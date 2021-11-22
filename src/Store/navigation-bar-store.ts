@@ -1,14 +1,11 @@
-import { createSignal } from 'solid-js';
-import type { Component } from 'solid-js';
-import {docs_routes, routes} from './routes';
-import { RouteProps } from 'solid-app-router';
+import { createMemo, createSignal } from 'solid-js';
+import { routes } from './routes';
 
-export type TNavigation = RouteProps & {
-  icon?: string;
-  label: string;
-  path: string;
-  component: Component;
-};
+export const routeSignal = createSignal(routes);
+export const docsNavSignal = createSignal(routes.filter(route => {
+  return !route.is_root_path;
+}));
 
-export const navSignal = createSignal(routes);
-export const docsNavSignal = createSignal(docs_routes)
+export const navMemo = createMemo(() => routes.filter(route => {
+  return route.is_root_path;
+}));

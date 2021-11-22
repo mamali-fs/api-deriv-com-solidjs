@@ -1,8 +1,9 @@
-import type { Component } from 'solid-js';
-import { Router, useRoutes } from 'solid-app-router';
+import type { Component } from "solid-js";
+import { Router, useRoutes } from "solid-app-router";
 
-import NavigationBar from './Components/NavigationBar';
-import { routes } from './Store/routes';
+import Footer from "./Components/Footer";
+import NavigationBar from "./Components/NavigationBar";
+import { routes } from "./Store/routes";
 
 const App: Component = () => {
   const Routes = useRoutes(routes);
@@ -11,9 +12,8 @@ const App: Component = () => {
     <>
       <Router>
         <NavigationBar />
-        <div>General items</div>
         <Routes />
-        <footer>Footer goes here</footer>
+        <Footer />
       </Router>
     </>
   );
