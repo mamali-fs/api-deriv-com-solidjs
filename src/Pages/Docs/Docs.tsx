@@ -1,20 +1,25 @@
-import type { Component } from "solid-js";
-import { Router, useRoutes } from "solid-app-router";
+import { Component, createMemo, Match, Switch } from "solid-js";
+import { Outlet, Router, useLocation } from "solid-app-router";
 import SideBar from "../../Components/SideBar";
-import QuickStart from "../QuickStart/index";
-import { docs_routes } from "../../Store/routes";
+import QuickStart from "./QuickStart";
 
 export const Docs: Component = () => {
-  const Routes = useRoutes(docs_routes);
+  const location = useLocation();
+  const is_root = createMemo(() => location.pathname === '/docs');
+  
   return (
-    <div class="flex justify-center pt-20 pb-32 h-screen mobile:hidden">
-      <div class="w-4/5 mt-5">
-        <Router>
+    <div class="grid grid-cols-documentation gap-2 h-screen mobile:hidden pt-20 mx-auto max-w-screen-xl">
+      <Router>
         <SideBar />
-        <Routes />
+        <Switch fallback={<div>...</div>}>
+          <Match when={is_root}>
+            <QuickStart />
+          </Match>
+          <Match when={!is_root}>
+            <Outlet />
+          </Match>
+        </Switch>
       </Router>
       </div>
-      
-    </div>
   );
 };

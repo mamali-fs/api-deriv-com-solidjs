@@ -1,13 +1,13 @@
 /* ./src/index.css */
 @font-face {
-  font-family: "ibm plex sans";
-  src: url("/src/assets/ibm-plex-sans-normal.woff2");
+  font-family: 'ibm plex sans';
+  src: url('/src/assets/ibm-plex-sans-normal.woff2');
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "ibm plex sans";
-  src: url("/src/assets/ibm-plex-sans-bold.woff2");
+  font-family: 'ibm plex sans';
+  src: url('/src/assets/ibm-plex-sans-bold.woff2');
   font-weight: bold;
 }
 
@@ -53,7 +53,7 @@ div.code {
   }
 
   .mobile-nav-after {
-    content: "";
+    content: '';
     position: absolute;
     left: 0px;
     width: 4px;
@@ -62,9 +62,8 @@ div.code {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }
-
   .sidebar {
-    content: "";
+    content: '';
     position: absolute;
     left: 0px;
     width: 4px;
@@ -77,4 +76,25 @@ div.code {
 .hljs {
   color: #24292e;
   background: rgba(17, 24, 39, 1) !important;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-gray-darkest;
+  }
+  h1 {
+    @apply text-5xl mb-2 text-center font-bold;
+  }
+  h3 {
+    @apply text-2xl mb-2 font-bold;
+  }
+  p {
+    @apply leading-7 mb-4;
+  }
+  ul {
+    @apply ml-5;
+  }
+  li {
+    @apply mb-4 mt-4 list-item list-disc;
+  }
 }
