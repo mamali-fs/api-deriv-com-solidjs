@@ -4,6 +4,7 @@
   src: url("/src/assets/ibm-plex-sans-normal.woff2");
   font-weight: normal;
 }
+
 @font-face {
   font-family: "ibm plex sans";
   src: url("/src/assets/ibm-plex-sans-bold.woff2");
@@ -13,6 +14,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 div.code {
   white-space: pre;
 }
@@ -25,6 +27,7 @@ div.code {
   .inner-shadow {
     box-shadow: inset 0 -1px 0 0 rgb(255 255 255 / 10%);
   }
+
   .active-page {
     position: absolute;
     width: 0;
@@ -35,16 +38,20 @@ div.code {
     visibility: hidden;
     transition: all 0.2s ease-in-out;
   }
+
   .navigation-transition {
     width: 20px;
     visibility: visible;
   }
+
   .burger {
     transition: left 0.4s ease 0s;
   }
+
   .transition-left {
     left: 0;
   }
+
   .mobile-nav-after {
     content: "";
     position: absolute;
@@ -65,4 +72,9 @@ div.code {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }
+}
+
+.hljs {
+  color: #24292e;
+  background: rgba(17, 24, 39, 1) !important;
 }

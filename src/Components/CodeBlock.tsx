@@ -12,5 +12,5 @@ export const CodeBlock: Component<CodeBlockProps> = ({ language = 'javascript', 
   onMount(() => {
     hljs.highlightAll();
   });
-  return <code class={`langauge-${language}`}>{children}</code>;
+  return <code class={`langauge-${language} bg-gray-900`}>{children}</code>;
 };
