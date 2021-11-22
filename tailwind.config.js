@@ -15,6 +15,10 @@ module.exports = {
     },
     
     extend: {
+      backgroundImage: {
+        'arrow-left': "url('/src/assets/arrow_left.svg')",
+        'arrow-right': "url('/src/assets/arrow_right.svg')",
+      },
       gridTemplateColumns: {
         documentation: '220px 1fr',
       },
