@@ -15,6 +15,7 @@ const App: Component = () => {
         <Routes />
         <Footer />
       </Router>
+      
     </>
   );
 };
