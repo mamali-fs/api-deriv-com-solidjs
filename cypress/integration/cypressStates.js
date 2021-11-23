@@ -36,6 +36,36 @@ const cypressStates = {
   },  
 };
 
+const cypressEvents = {
+  CLICK_PLAYGROUND: function () {
+    cy.contains(/playground/i).click();
+    //user clicks
+  },
+  CLICK_HOME: function () {
+    cy.contains(/home/i).click();
+  },
+  CLICK_APP_REGISTRATION: function () {
+    cy.get("#sidebar > #app-registration")
+      .contains(/app registration/i)
+      .click();
+  },
+  CLICK_DOCUMENTATION: function () {
+    cy.contains(/documentation/i).click();
+  },
+  CLICK_FAQ: function () {
+    cy.get("#sidebar > #faq").contains(/faq/i).click();
+  },
+  CLICK_JSON_SCHEMAS: function () {
+    cy.get("#sidebar > #json-schemas").contains(/json schemas/i).click();
+  },
+  CLICK_BUG_BOUNTY: function () {
+    cy.get("#sidebar > #bug-bounty").contains(/bug bounty/i).click();
+  },
+  CLICK_GUIDE: function () {
+    cy.get("#sidebar > #api-guide").contains(/guide/i).click();
+  },
+};
+
 const cypressMobileStates = {
   home: () => {
     cy.contains(/deriv api/i).should('be.visible');
@@ -100,36 +130,6 @@ const cypressMobileEvents = {
   },
 };
 
-const cypressEvents = {
-  CLICK_PLAYGROUND: function () {
-    cy.contains(/playground/i).click();
-    //user clicks
-  },
-  CLICK_HOME: function () {
-    cy.contains(/home/i).click();
-  },
-  CLICK_APP_REGISTRATION: function () {
-    cy.get("#sidebar > #app-registration")
-      .contains(/app registration/i)
-      .click();
-  },
-  CLICK_DOCUMENTATION: function () {
-    cy.contains(/documentation/i).click();
-  },
-  CLICK_FAQ: function () {
-    cy.get("#sidebar > #faq").contains(/faq/i).click();
-  },
-  CLICK_JSON_SCHEMAS: function () {
-    cy.get("#sidebar > #json-schemas").contains(/json schemas/i).click();
-  },
-  CLICK_BUG_BOUNTY: function () {
-    cy.get("#sidebar > #bug-bounty").contains(/bug bounty/i).click();
-  },
-  CLICK_GUIDE: function () {
-    cy.get("#sidebar > #api-guide").contains(/guide/i).click();
-  },
-};
-
 const homeSliderStates = {
   alessandro: () => {
     cy.get(`[aria-label="slider-content"]`).contains(/alessandro/i)
@@ -155,11 +155,14 @@ const homeSliderEvents = {
   },
   CLICK_LEFT: () => {
     cy.get(`[role="button"][aria-label="left"]`).click();
+    cy.wait(1000);
   },
   CLICK_RIGHT: () => {
     cy.get(`[role="button"][aria-label="right"]`).click();
+    cy.wait(1000);
   },
 }
+
 export const testsModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressStates, cypressEvents);
 export const testsMobileModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressMobileStates, cypressMobileEvents);
 export const homeSliderTestsModel = () => createTestModel(homeSliderMachine(), homeSliderStates, homeSliderEvents);
