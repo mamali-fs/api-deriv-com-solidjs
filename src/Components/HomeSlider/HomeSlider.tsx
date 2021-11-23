@@ -43,7 +43,7 @@ export const HomeSlider: Component = () => {
                 <div use:slider class="w-[588px] h-[248px]">
                     <For each={SLIDER_CONTENT}>
                         {(person) =>
-                            <div class="flex flex-col justify-center items-center">
+                            <div class="hover:cursor-pointer flex flex-col justify-center items-center">
                                 <blockquote class="mb-10">
                                     {person.message}
                                 </blockquote>
