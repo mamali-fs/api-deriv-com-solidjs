@@ -1,5 +1,6 @@
 import { createTestModel } from "./createTestModel.js";
 import { derivApiMachine } from "./derivApiMachine";
+import { homeSliderMachine } from "./homeSliderMachine.js";
 
 const cypressStates = {
   home: () => {
@@ -129,5 +130,36 @@ const cypressEvents = {
   },
 };
 
+const homeSliderStates = {
+  alessandro: () => {
+    cy.get(`[aria-label="slider-content"]`).contains(/alessandro/i)
+  },
+  thiago: () => {
+    cy.get(`[aria-label="slider-content"]`).contains(/thiago/i)
+  },
+  josh: () => {
+    cy.get(`[aria-label="slider-content"]`).contains(/josh/i)
+  },
+}
+
+const homeSliderEvents = {
+  DRAG_LEFT: () => {
+    cy.get(`[role="slider"][aria-label="home"]`)
+    .trigger("mousedown", { button: 0 })
+    .trigger("mousemove", { clientX: -275, clientY: 0 })
+  },
+  DRAG_RIGHT: () => {
+    cy.get(`[role="slider"][aria-label="home"]`)
+    .trigger("mousedown", { button: 0 })
+    .trigger("mousemove", { clientX: 275, clientY: 0 })
+  },
+  CLICK_LEFT: () => {
+    cy.get(`[role="button"][aria-label="left"]`).click();
+  },
+  CLICK_RIGHT: () => {
+    cy.get(`[role="button"][aria-label="right"]`).click();
+  },
+}
 export const testsModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressStates, cypressEvents);
 export const testsMobileModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressMobileStates, cypressMobileEvents);
+export const homeSliderTestsModel = () => createTestModel(homeSliderMachine(), homeSliderStates, homeSliderEvents);
