@@ -5,7 +5,7 @@ context("Snapshots", () => {
   const testPlans = testsModel('home').getShortestPathPlans();
   testPlans.forEach((plan) => {
     describe(plan.description, () => {
-      plan.paths.forEach(itTests('https://api.deriv.com/'));
+      plan.paths.forEach(itTests('/'));
       afterEach(() => {
         cy.matchImageSnapshot();
       });
