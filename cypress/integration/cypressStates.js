@@ -1,5 +1,6 @@
 import { createTestModel } from "./createTestModel.js";
 import { derivApiMachine } from "./derivApiMachine";
+import { homeSliderMachine } from "./homeSliderMachine.js";
 
 const cypressStates = {
   home: () => {
@@ -33,6 +34,36 @@ const cypressStates = {
   guide: () => {
     cy.get('.doc-main-title').contains(/API guide/i).should('be.visible');
   },  
+};
+
+const cypressEvents = {
+  CLICK_PLAYGROUND: function () {
+    cy.contains(/playground/i).click();
+    //user clicks
+  },
+  CLICK_HOME: function () {
+    cy.contains(/home/i).click();
+  },
+  CLICK_APP_REGISTRATION: function () {
+    cy.get("#sidebar > #app-registration")
+      .contains(/app registration/i)
+      .click();
+  },
+  CLICK_DOCUMENTATION: function () {
+    cy.contains(/documentation/i).click();
+  },
+  CLICK_FAQ: function () {
+    cy.get("#sidebar > #faq").contains(/faq/i).click();
+  },
+  CLICK_JSON_SCHEMAS: function () {
+    cy.get("#sidebar > #json-schemas").contains(/json schemas/i).click();
+  },
+  CLICK_BUG_BOUNTY: function () {
+    cy.get("#sidebar > #bug-bounty").contains(/bug bounty/i).click();
+  },
+  CLICK_GUIDE: function () {
+    cy.get("#sidebar > #api-guide").contains(/guide/i).click();
+  },
 };
 
 const cypressMobileStates = {
@@ -99,35 +130,39 @@ const cypressMobileEvents = {
   },
 };
 
-const cypressEvents = {
-  CLICK_PLAYGROUND: function () {
-    cy.contains(/playground/i).click();
-    //user clicks
+const homeSliderStates = {
+  alessandro: () => {
+    cy.get(`[aria-label="slider-content"]`).contains(/alessandro/i)
   },
-  CLICK_HOME: function () {
-    cy.contains(/home/i).click();
+  thiago: () => {
+    cy.get(`[aria-label="slider-content"]`).contains(/thiago/i)
   },
-  CLICK_APP_REGISTRATION: function () {
-    cy.get("#sidebar > #app-registration")
-      .contains(/app registration/i)
-      .click();
+  josh: () => {
+    cy.get(`[aria-label="slider-content"]`).contains(/josh/i)
   },
-  CLICK_DOCUMENTATION: function () {
-    cy.contains(/documentation/i).click();
+}
+
+const homeSliderEvents = {
+  DRAG_LEFT: () => {
+    cy.get(`[role="slider"][aria-label="home"]`)
+    .trigger("mousedown", { button: 0 })
+    .trigger("mousemove", { clientX: -275, clientY: 0 })
   },
-  CLICK_FAQ: function () {
-    cy.get("#sidebar > #faq").contains(/faq/i).click();
+  DRAG_RIGHT: () => {
+    cy.get(`[role="slider"][aria-label="home"]`)
+    .trigger("mousedown", { button: 0 })
+    .trigger("mousemove", { clientX: 275, clientY: 0 })
   },
-  CLICK_JSON_SCHEMAS: function () {
-    cy.get("#sidebar > #json-schemas").contains(/json schemas/i).click();
+  CLICK_LEFT: () => {
+    cy.get(`[role="button"][aria-label="left"]`).click();
+    cy.wait(1000);
   },
-  CLICK_BUG_BOUNTY: function () {
-    cy.get("#sidebar > #bug-bounty").contains(/bug bounty/i).click();
+  CLICK_RIGHT: () => {
+    cy.get(`[role="button"][aria-label="right"]`).click();
+    cy.wait(1000);
   },
-  CLICK_GUIDE: function () {
-    cy.get("#sidebar > #api-guide").contains(/guide/i).click();
-  },
-};
+}
 
 export const testsModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressStates, cypressEvents);
 export const testsMobileModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressMobileStates, cypressMobileEvents);
+export const homeSliderTestsModel = () => createTestModel(homeSliderMachine(), homeSliderStates, homeSliderEvents);

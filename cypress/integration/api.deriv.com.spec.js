@@ -25,4 +25,3 @@ context("Deriv API mobile", () => {
     });
   });
 });
-
