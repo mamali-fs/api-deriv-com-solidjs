@@ -23,7 +23,9 @@ module.exports = {
         documentation: '220px 1fr',
       },
       colors: {
-        'white-gray': '#c2c2c2',
+        "white-gray": "#c2c2c2",
+        "dark-100": "#0e0e0e",
+        "gray-rgba": 'rgba(37, 37, 37, 0.72)',
         'gray-darkest': '#333333'
       },
       spacing: {
