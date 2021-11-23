@@ -1,5 +1,11 @@
-import { createSignal } from 'solid-js';
-import {docs_routes, routes} from './routes';
+import { createMemo, createSignal } from 'solid-js';
+import { routes } from './routes';
 
-export const navSignal = createSignal(routes);
-export const docsNavSignal = createSignal(docs_routes)
+export const routeSignal = createSignal(routes);
+export const docsNavSignal = createSignal(routes.filter(route => {
+  return !route.is_root_path;
+}));
+
+export const navMemo = createMemo(() => routes.filter(route => {
+  return route.is_root_path;
+}));

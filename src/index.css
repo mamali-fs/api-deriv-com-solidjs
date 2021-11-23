@@ -1,12 +1,13 @@
 /* ./src/index.css */
+
 @font-face {
-  font-family: "ibm plex sans";
-  src: url("/src/assets/ibm-plex-sans-normal.woff2");
+  font-family: 'ibm plex sans';
+  src: url('/src/assets/ibm-plex-sans-normal.woff2');
   font-weight: normal;
 }
 @font-face {
-  font-family: "ibm plex sans";
-  src: url("/src/assets/ibm-plex-sans-bold.woff2");
+  font-family: 'ibm plex sans';
+  src: url('/src/assets/ibm-plex-sans-bold.woff2');
   font-weight: bold;
 }
 
@@ -22,47 +23,89 @@ div.code {
 }
 
 @layer utilities {
-  .inner-shadow {
-    box-shadow: inset 0 -1px 0 0 rgb(255 255 255 / 10%);
-  }
-  .active-page {
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #ff444f;
-    visibility: hidden;
-    transition: all 0.2s ease-in-out;
-  }
-  .navigation-transition {
-    width: 20px;
-    visibility: visible;
-  }
-  .burger {
-    transition: left 0.4s ease 0s;
-  }
-  .transition-left {
-    left: 0;
-  }
-  .mobile-nav-after {
-    content: "";
-    position: absolute;
-    left: 0px;
-    width: 4px;
-    height: 40px;
-    background-color: red;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-  }
+    .inner-shadow {
+        box-shadow: inset 0 -1px 0 0 rgb(255 255 255 / 10%);
+    }
+    .active-page {
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #ff444f;
+        visibility: hidden;
+        transition: all 0.2s ease-in-out;
+    }
+    .navigation-transition {
+        width: 20px;
+        visibility: visible;
+    }
+    .burger {
+        transition: left 0.4s ease 0s;
+    }
+    .transition-left {
+        left: 0;
+    }
+    .mobile-nav-after {
+        content: '';
+        position: absolute;
+        left: 0px;
+        width: 4px;
+        height: 40px;
+        background-color: red;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    .sidebar {
+        content: '';
+        position: absolute;
+        left: 0px;
+        width: 4px;
+        height: 44px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    .main-page-card-mobile {
+        max-width: 360px;
+    }
+    .main-page-row {
+        height: fit-content;
+        padding: 80px 0;
+    }
+    .mb-30px {
+        margin-bottom: 30px;
+    }
+    .text-color-general {
+        color: #333;
+    }
+    .w-9\/10 {
+        width: 90%;
+    }
+    .ways {
+        @apply flex items-center my-5 mx-3 p-4 rounded;
+        max-width: 660px;
+        box-shadow: 0 4px 8px 0 rgb(14 14 14 / 10%);
+        background-color: #fff;
+    }
+}
 
-  .sidebar {
-    content: "";
-    position: absolute;
-    left: 0px;
-    width: 4px;
-    height: 44px;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-gray-darkest;
+  }
+  h1 {
+    @apply text-5xl mb-2 text-center font-bold;
+  }
+  h3 {
+    @apply text-2xl mb-2 font-bold;
+  }
+  p {
+    @apply leading-7 mb-4;
+  }
+  ul {
+    @apply ml-5;
+  }
+  li {
+    @apply mb-4 mt-4 list-item list-disc;
   }
 }

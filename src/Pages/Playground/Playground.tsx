@@ -1,34 +1,22 @@
 import type { Component } from 'solid-js';
-import {createEffect, createSignal} from 'solid-js';
-import { createStore } from 'solid-js/store';
-import Request from './Request';
-import WS from '../../Helpers/WS';
-import { Conversation } from './Conversation';
+import { ApiSelector } from './components/ApiSelector';
+import { Authenticate } from './components/Authenticate';
+import { Conversation } from './components/Conversation';
 
-export const Playground: Component = () => {
-    const [reqs, setReqs] = createSignal([]);
+export const Playground: Component = () => (
+    <div data-testid="playground-page" class="text-base bg-dark-100 text-white">
+        <h1 class="text-5xl text-center font-bold mb-10">API Playground</h1>
 
-    const addToReqs = (value) => {
-        return setReqs([...reqs(), value]);
-    };
+        <div class="grid grid-cols-2 gap-10">
+            <div>
+                <ApiSelector />
+                <Authenticate />
+                <Conversation />
+            </div>
 
-    const resetReqs = () => {
-        return setReqs([]);
-    };
-
-    createEffect(() => {
-        WS.init((item: string) => {
-            addToReqs(item)
-        });
-    });
-
-    return (
-        <div data-testid="playground-page">
-            <h1>Playground page</h1>
-            <main className="bg-gray-800 px-4">
-                <Request resetReqs={resetReqs}/>
-                <Conversation data={reqs} />
-            </main>
+            <div class="">
+                result part must be here
+            </div>
         </div>
-    )
-} 
+    </div>
+)
