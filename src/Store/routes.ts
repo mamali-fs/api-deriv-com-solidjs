@@ -1,41 +1,40 @@
-import { lazy } from 'solid-js';
-import { TNavigation } from './navigation-bar-store';
+import { lazy } from "solid-js";
+import { TNavigation } from "./side-bar-store";
 
-const Docs = lazy(() => import('../Pages/Docs/index'));
-const Home = lazy(() => import('../Pages/Home/index'));
-const Playground = lazy(() => import('../Pages/Playground/index'));
-const NotFound = lazy(()=> import("../Pages/NotFound/index"))
+const NotFound = lazy(() => import("../Pages/NotFound"));
+
 
 export const routes: TNavigation[] = [
   {
     label: 'Home',
     path: '/',
-    component: Home,
+    is_root_path: true,
+    component: lazy(() => import('../Pages/Home')),
   },
   {
     label: 'Documentation',
     path: '/docs',
-    component: Docs,
+    is_root_path: true,
+    component: lazy(() => import('../Pages/Docs')),
   },
   {
     label: 'API Playground',
     path: '/playground',
-    component: Playground,
+    is_root_path: true,
+    component: lazy(() => import('../Pages/Playground')),
   },
-];
-
-export const docs_routes: TNavigation[]=[{
-  label: 'Quick Start',
-  path: '/docs',
-  component: NotFound,
-},
   {
-    label: 'App Registration',
+    label: 'Quickstart',
+    path: '/docs',
+    component: lazy(() => import('../Pages/Docs/QuickStart')),
+  },
+  {
+    label: 'App registration',
     path: '/docs/app-registration',
     component: NotFound,
   },
   {
-    label: 'API Guide',
+    label: 'API guide',
     path: '/docs/api-guide',
     component: NotFound,
   },
@@ -45,7 +44,7 @@ export const docs_routes: TNavigation[]=[{
     component: NotFound,
   },
   {
-    label: 'JSON Schemas',
+    label: 'JSON schemas',
     path: '/docs/json-schemas',
     component: NotFound,
   },
@@ -53,4 +52,5 @@ export const docs_routes: TNavigation[]=[{
     label: 'Bug Bounty',
     path: '/docs/bug-bounty',
     component: NotFound,
-  }]
+  },
+];
