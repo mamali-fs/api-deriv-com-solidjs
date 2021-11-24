@@ -1,3 +1,4 @@
+import { jsxOpeningElement } from "@babel/types";
 import {
   Component,
   createEffect,
@@ -7,6 +8,7 @@ import {
 } from "solid-js";
 import { For, Show, createSignal } from "solid-js";
 
+// TODO: we should use schemaSend for dynamic import.
 
 // const schemaSend = async (item: string) =>  {
 //   return await import('../../../schema/'+ item+ '/send.json')
@@ -387,21 +389,24 @@ const Signature: Component<SignatureType> = ({
   const signatureExpand = () => {
     buttonClick();
     setShowSignature(!showSignature());
-    if( activeClass() === ''){
-      setActiveClass('box-active')
+  };
+
+  
+  const getType = () => {
+    if(items?.additionalProperties !== undefined && property?.items?.title){
+      return property?.items?.title
+    } else if (additionalProperties !== undefined && property.title) {
+      return property?.title
     } else {
-      setActiveClass('')
+      if (Array.isArray(type)) {
+        return type?.join(", ")
+      } else {
+        return type
+      }
     }
   };
 
-  const signatureType =
-    items?.additionalProperties !== undefined && property.items?.title
-      ? property?.items?.title
-      : additionalProperties !== undefined && property.title
-      ? property.title
-      : Array.isArray(type)
-      ? type?.join(", ")
-      : type;
+  const signatureType = getType();
 
   return (
     <div class="signature flex flex-col mb-6">
@@ -565,14 +570,16 @@ const JsonSchema: Component<JsonSchemaType> = ({ json, mouseHoverFunc }) => {
 export const PlaygroundApiDocs: Component<PlaygroundApiDocsType> = ({
   name,
 }) => {
+
+  // TODO: we should update requestSchema, responseSchema from dynamic import.
+
   // const [requestSchema, setRequestSchema] = createSignal({});
   // const [responseSchema, setResponseSchema] = createSignal({});
 
   // createEffect(() => {
-  //   // setSchemaName(name)
   //   schemaSend(name).then(res => { setResponseSchema(res)})
-  //   console.log("request",responseSchema())
   // })
+
   return (
     <div data-testid="playground-api-docs">
       <div id="playground-req-schema" class="text-base">
