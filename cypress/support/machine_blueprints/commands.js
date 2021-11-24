@@ -1,6 +1,7 @@
 import { createTestModel } from "./createTestModel.js";
 import { derivApiMachine } from "./derivApiMachine";
 import { homeSliderMachine } from "./homeSliderMachine.js";
+import { hamburgerMachine } from "./hamburgerMachine.js"
 
 const cypressStates = {
   home: () => {
@@ -163,6 +164,92 @@ const homeSliderEvents = {
   },
 }
 
+const hamburgerStates = {
+  open_hamburger: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/api playground/i).should('be.visible')
+  },
+  documentation_closed: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/quickstart/i).should('not.be.visible')
+  },
+  documentation_open: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/quickstart/i).should('be.visible')
+  },
+  quickstart: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/quickstart/i).should('be.visible')
+  },
+  app_registration: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/app registration/i).should('be.visible')
+  },
+  api_guide: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/api guide/i).should('be.visible')
+  },
+  faq: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/faq/i).should('be.visible')
+  },
+  json_schemas: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/json schemas/i).should('be.visible')
+  },
+  bug_bounty: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/bug bounty/i).should('be.visible')
+  },
+  api_playground: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/home/i).should('be.visible')
+  },
+  closed_hamburger: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/api playground/i).should('not.be.visible')
+  }
+}
+
+const hamburgerEvents = {
+  CLICK_HAMBURGER: () => {
+    cy.get(`[role="menu"]`).click();
+    cy.wait(500);
+  },
+  CLICK_HOME: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/home/i).click()
+  },
+  TOGGLE_DOCUMENTATION: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/documentation/i).click()
+  },
+  CLICK_QUICKSTART: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/documentation/i).click()
+    cy.wait(250)
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/quickstart/i).click()
+  },
+  CLICK_APP_REGISTRATION: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/documentation/i).click()
+    cy.wait(250)
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/app registration/i).click()
+  },
+  CLICK_API_GUIDE: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/documentation/i).click()
+    cy.wait(250)
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/api guide/i).click()
+  },
+  CLICK_FAQ: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/documentation/i).click()
+    cy.wait(250)
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/faq/i).click()
+  },
+  CLICK_JSON_SCHEMAS: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/documentation/i).click()
+    cy.wait(250)
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/json schemas/i).click()
+  },
+  CLICK_BUG_BOUNTY: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/documentation/i).click()
+    cy.wait(250)
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/bug bounty/i).click()
+  },
+  CLICK_PLAYGROUND: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/api playground/i).click()
+  },
+  CLOSE_HAMBURGER: () => {
+    cy.get(`.desktop\:hidden[role="menu"]`).click();
+    cy.wait(500);
+  },
+}
+
 const itVisitsAndRunsPathTests = (url) => (path) => {
   it(path.description, function () {
     cy.visit(url).then(path.test);
@@ -173,3 +260,4 @@ cy.itTests = (appAddress) => itVisitsAndRunsPathTests(appAddress);
 cy.testsModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressStates, cypressEvents);
 cy.testsMobileModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressMobileStates, cypressMobileEvents);
 cy.homeSliderTestsModel = () => createTestModel(homeSliderMachine(), homeSliderStates, homeSliderEvents);
+cy.hamburgerTestModel = () => createTestModel(hamburgerMachine(), hamburgerStates, hamburgerEvents);
