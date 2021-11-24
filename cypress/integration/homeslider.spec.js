@@ -1,11 +1,11 @@
-// context("Homepage slider", () => {
-// const testPlans = cy.homeSliderTestsModel().getSimplePathPlans();
-//     testPlans.forEach((plan) => {
-//         describe(plan.description, () => {
-//         plan.paths.forEach(cy.itTests('/'));
-//         });
-//     });
-// });
+context("Homepage slider", () => {
+const testPlans = cy.homeSliderTestsModel().getSimplePathPlans();
+    testPlans.forEach((plan) => {
+        describe(plan.description, () => {
+        plan.paths.forEach(cy.itTests('/'));
+        });
+    });
+});
   
 context("Deriv API mobile", () => {
 const testPlans = cy.homeSliderTestsModel().getSimplePathPlans();
