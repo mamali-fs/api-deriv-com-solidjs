@@ -25,7 +25,7 @@ export const Playground: Component = () => (
               id="playground"
               class="playground-api-docs flex flex-col w-1/2 mobile:w-full bg-dark-100 text-white"
             >
-              <PlaygroundApiDocs name="api_token" />
+              <PlaygroundApiDocs />
             </div>
           </div>
         </div>

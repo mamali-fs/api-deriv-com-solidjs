@@ -1,4 +1,5 @@
 import { jsxOpeningElement } from "@babel/types";
+import { useLocation } from "solid-app-router";
 import {
   Component,
   createEffect,
@@ -8,14 +9,8 @@ import {
 } from "solid-js";
 import { For, Show, createSignal } from "solid-js";
 
-// TODO: we should use schemaSend for dynamic import.
-
-// const schemaSend = async (item: string) =>  {
-//   return await import('../../../schema/'+ item+ '/send.json')
-// };
-
 type PlaygroundApiDocsType = {
-  name: string;
+
 };
 
 type SignatureType = {
@@ -25,7 +20,7 @@ type SignatureType = {
   enumArray?: Array<string>;
   defaultValue?: string;
   description?: string;
-  examples?:Array<string>;
+  examples?: Array<string>;
   max?: number;
   min?: number;
   items?: any;
@@ -47,196 +42,22 @@ type BoxType = {
   nested?: boolean;
 };
 
-const sampleRequest = {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Application: Markup Details (request)",
-  "description": "Retrieve details of `app_markup` according to criteria specified.",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": [
-      "read"
-  ],
-  "additionalProperties": false,
-  "required": [
-      "app_markup_details",
-      "date_from",
-      "date_to"
-  ],
-  "properties": {
-      "app_markup_details": {
-          "description": "Must be `1`",
-          "type": "integer",
-          "enum": [
-              1
-          ]
-      },
-      "app_id": {
-          "description": "[Optional] Specific application `app_id` to report on.",
-          "type": "integer"
-      },
-      "client_loginid": {
-          "description": "[Optional] Specific client loginid to report on, like CR12345",
-          "type": "string",
-          "pattern": "^[A-Za-z]{2,5}[0-9]{2,20}$"
-      },
-      "date_from": {
-          "description": "Start date (epoch or YYYY-MM-DD HH:MM:SS). Results are inclusive of this time.",
-          "type": "string",
-          "pattern": "^([0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3]):([0-5]?[0-9]):([0-5]?[0-9])|[0-9]{1,10})$"
-      },
-      "date_to": {
-          "description": "End date (epoch or YYYY-MM-DD HH::MM::SS). Results are inclusive of this time.",
-          "type": "string",
-          "pattern": "^([0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3]):([0-5]?[0-9]):([0-5]?[0-9])|[0-9]{1,10})$"
-      },
-      "description": {
-          "description": "[Optional] If set to 1, will return `app_markup` transaction details.",
-          "type": "integer",
-          "enum": [
-              0,
-              1
-          ]
-      },
-      "limit": {
-          "description": "[Optional] Apply upper limit to count of transactions received.",
-          "type": "number",
-          "default": 1000,
-          "maximum": 1000,
-          "minimum": 0
-      },
-      "offset": {
-          "description": "[Optional] Number of transactions to skip.",
-          "type": "number"
-      },
-      "sort": {
-          "description": "[Optional] Sort direction on `transaction_time`. Other fields sort order is ASC.",
-          "type": "string",
-          "default": "DESC",
-          "enum": [
-              "ASC",
-              "DESC"
-          ]
-      },
-      "sort_fields": {
-          "description": "[Optional] One or more of the specified fields to sort on. Default sort field is by `transaction_time`.",
-          "type": "array",
-          "items": {
-              "type": "string",
-              "enum": [
-                  "app_id",
-                  "client_loginid",
-                  "transaction_time"
-              ]
-          },
-          "maxItems": 3,
-          "minItems": 0,
-          "uniqueItems": true
-      },
-      "passthrough": {
-          "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
-          "type": "object"
-      },
-      "req_id": {
-          "description": "[Optional] Used to map request to response.",
-          "type": "integer"
-      }
-  }
-}
+const fetchRecieveData = async (id: string) =>
+  (id && await fetch(`https://api.deriv.com/config/v3/${id}/receive.json`, {
+    mode: 'cors' // 'cors' by default
+  })).json();
 
-const sampleResponse = {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Application: Markup Details (response)",
-  "description": "Per transaction reporting of app_markup",
-  "type": "object",
-  "required": [
-      "echo_req",
-      "msg_type"
-  ],
-  "properties": {
-      "app_markup_details": {
-          "title": "app_markup_details",
-          "description": "App Markup transaction details",
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "transactions": {
-                  "description": "Array of returned transactions",
-                  "type": "array",
-                  "items": {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "properties": {
-                          "app_id": {
-                              "description": "ID of the application where this contract was purchased.",
-                              "type": "integer"
-                          },
-                          "app_markup": {
-                              "description": "The markup the client paid in their currency",
-                              "type": "number"
-                          },
-                          "app_markup_usd": {
-                              "description": "The markup the client paid in USD",
-                              "type": "number"
-                          },
-                          "app_markup_value": {
-                              "description": "The markup the client paid in the app developer's currency",
-                              "type": "number"
-                          },
-                          "client_currcode": {
-                              "description": "Currency code of the client",
-                              "type": "string"
-                          },
-                          "client_loginid": {
-                              "description": "Login ID of the client",
-                              "type": "string"
-                          },
-                          "dev_currcode": {
-                              "description": "Currency code of the app developer",
-                              "type": "string"
-                          },
-                          "dev_loginid": {
-                              "description": "Login ID of the app developer",
-                              "type": "string"
-                          },
-                          "transaction_id": {
-                              "description": "The transaction ID. Every contract (buy or sell) and every payment has a unique ID.",
-                              "type": "integer",
-                              "examples": [
-                                  10867502908
-                              ]
-                          },
-                          "transaction_time": {
-                              "description": "The epoch value of purchase time of transaction",
-                              "type": "string"
-                          }
-                      }
-                  }
-              }
-          }
-      },
-      "echo_req": {
-          "description": "Echo of the request made.",
-          "type": "object"
-      },
-      "msg_type": {
-          "description": "Action name of the request made.",
-          "type": "string",
-          "enum": [
-              "app_markup_details"
-          ]
-      },
-      "req_id": {
-          "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-          "type": "integer"
-      }
-  }
-}
+const fetchSendData = async (id: string) =>
+  (id && await fetch(`https://api.deriv.com/config/v3/${id}/send.json`, {
+    mode: 'cors' // 'cors' by default
+  })).json();
 
 const Box: Component<BoxType> = ({ content, activeClass, nested }) => {
   const [showSignatureBox, setShowSignatureBox] = createSignal(false);
   const [showSourceButton, setShowSourceButton] = createSignal(false);
 
-  const strDescription = content?.description?.replace(/(`.`)/g, (match:string) => `<code class="bg-[rgba(255,255,255,.16)] text-[#fff] text-[14px] mr-1.5 px-2 py-1.5 font-normal rounded">${match}</code>`)?.replace(/`/g ,'');
+  console.log("content", content)
+  const strDescription = content?.description?.replace(/(`.`)/g, (match: string) => `<code class="bg-[rgba(255,255,255,.16)] text-[#fff] text-[14px] mr-1.5 px-2 py-1.5 font-normal rounded">${match}</code>`)?.replace(/`/g, '');
 
   let expand_ref: any, source_ref: any;
 
@@ -254,16 +75,14 @@ const Box: Component<BoxType> = ({ content, activeClass, nested }) => {
         onMouseLeave={() => mouseHoverFunc(0)}
       >
         <div
-          class={`box_header bg-[#252525] ${
-            nested ? "px-4 py-2" : "p-6"
-          } rounded-t-[6px] ${!content?.title && "px-4 py-2"}`}
+          class={`box_header bg-[#252525] ${nested ? "px-4 py-2" : "p-6"
+            } rounded-t-[6px] ${!content?.title && "px-4 py-2"}`}
         >
           <div class="box-title">
             <Show when={content?.title}>
               <div
-                class={`box-name ${
-                  nested ? "text-base" : "text-2xl"
-                } mobile:text-lg mb-2 text-white leading-none font-bold`}
+                class={`box-name ${nested ? "text-base" : "text-2xl"
+                  } mobile:text-lg mb-2 text-white leading-none font-bold`}
               >
                 {content?.title}
               </div>
@@ -276,11 +95,11 @@ const Box: Component<BoxType> = ({ content, activeClass, nested }) => {
                     innerHTML={strDescription}
                   ></p>
                 </div>
-                <Show when={content.auth_required}>
+                <Show when={content?.auth_required}>
                   <div class="scopes flex items-center	justify-end text-[14px] text-[#c2c2c2] w-full">
                     Auth Required:
                     <For each={content?.auth_scopes}>
-                      {(scope:Array<string>) => (
+                      {(scope: Array<string>) => (
                         <span class="type-enum leading-[1.43] bg-[rgba(133,172,176,.16)] text-[#85acb0] text-[14px] border-none px-2 py-1.5 ml-2 px-2 py-1/5 whitespace-nowrap rounded">
                           {scope}
                         </span>
@@ -345,7 +164,7 @@ const Box: Component<BoxType> = ({ content, activeClass, nested }) => {
                 )}
               </For>
             </Show>
-            <Show when={!localProperties && content.enum}>
+            <Show when={!localProperties && content?.enum}>
               <Signature
                 type={content?.type}
                 enumArray={content?.enum}
@@ -384,16 +203,16 @@ const Signature: Component<SignatureType> = ({
   buttonClick,
 }) => {
   const [showSignature, setShowSignature] = createSignal(false);
-  const [activeClass , setActiveClass] = createSignal('');
-  const strDescription = description?.replace(/(`.`)/g, match => `<code class="bg-[rgba(255,255,255,.16)] text-[#fff] text-[14px] mr-1.5 px-2 py-1.5 font-normal rounded">${match}</code>`)?.replace(/`/g ,'');
+  const [activeClass, setActiveClass] = createSignal('');
+  const strDescription = description?.replace(/(`.`)/g, match => `<code class="bg-[rgba(255,255,255,.16)] text-[#fff] text-[14px] mr-1.5 px-2 py-1.5 font-normal rounded">${match}</code>`)?.replace(/`/g, '');
   const signatureExpand = () => {
     buttonClick();
     setShowSignature(!showSignature());
   };
 
-  
+
   const getType = () => {
-    if(items?.additionalProperties !== undefined && property?.items?.title){
+    if (items?.additionalProperties !== undefined && property?.items?.title) {
       return property?.items?.title
     } else if (additionalProperties !== undefined && property.title) {
       return property?.title
@@ -438,9 +257,8 @@ const Signature: Component<SignatureType> = ({
                 <span
                   class={
                     items && items.type != "string"
-                      ? `signature-type-string mt-2 mr-2 text-[14px] bg-[#0e0e0e] text-[#9ed178] px-4 py-1.5 rounded cursor-pointer '} ${
-                          !showSignature() && "bg-[#323738] text-[#9ed178]"
-                        }`
+                      ? `signature-type-string mt-2 mr-2 text-[14px] bg-[#0e0e0e] text-[#9ed178] px-4 py-1.5 rounded cursor-pointer '} ${!showSignature() && "bg-[#323738] text-[#9ed178]"
+                      }`
                       : "signature-type-string mt-2 mr-2 text-[14px] text-[#9ed178]"
                   }
                   onClick={signatureExpand}
@@ -450,9 +268,8 @@ const Signature: Component<SignatureType> = ({
               </Match>
               <Match when={type === "object"}>
                 <span
-                  class={`signature-type-object mt-2 mr-2 text-[14px] bg-[#0e0e0e] text-[#9ed178] px-4 py-1.5 rounded  cursor-pointer ${
-                    !showSignature() && "bg-[#323738] text-[#ffffff]"
-                  }`}
+                  class={`signature-type-object mt-2 mr-2 text-[14px] bg-[#0e0e0e] text-[#9ed178] px-4 py-1.5 rounded  cursor-pointer ${!showSignature() && "bg-[#323738] text-[#ffffff]"
+                    }`}
                   onClick={signatureExpand}
                 >
                   {signatureType}
@@ -506,7 +323,7 @@ const Signature: Component<SignatureType> = ({
           </For>
           <Show when={min !== undefined || max !== undefined}>
             <span class="type-keyword text-[#c2c2c2] text-[14px] mt-2 mr-2">
-              [{min};{max? max : '∞'}]
+              [{min};{max ? max : '∞'}]
             </span>
           </Show>
           <Show when={defaultValue}>
@@ -545,7 +362,7 @@ const Signature: Component<SignatureType> = ({
       <Show when={!items && type === "object" && showSignature()}>
         <div class="signature-box-container mt-2 clear-both">
           <div class="sub-box-container bg-[rgba(37,37,37,.4)">
-              <Box content={property}  nested={true} />              
+            <Box content={property} nested={true} />
           </div>
         </div>
       </Show>
@@ -567,28 +384,35 @@ const JsonSchema: Component<JsonSchemaType> = ({ json, mouseHoverFunc }) => {
   );
 };
 
-export const PlaygroundApiDocs: Component<PlaygroundApiDocsType> = ({
-  name,
-}) => {
+export const PlaygroundApiDocs: Component<PlaygroundApiDocsType> = () => {
+  const location = useLocation();
+  const [hashLocation, setHashLocation] = createSignal(location.hash)
 
-  // TODO: we should update requestSchema, responseSchema from dynamic import.
-
-  // const [requestSchema, setRequestSchema] = createSignal({});
-  // const [responseSchema, setResponseSchema] = createSignal({});
-
-  // createEffect(() => {
-  //   schemaSend(name).then(res => { setResponseSchema(res)})
-  // })
+  const [receive] = createResource(hashLocation, fetchRecieveData);
+  const [send] = createResource(hashLocation, fetchSendData);
+  createEffect(() => {
+    setHashLocation(location.hash)
+  })
 
   return (
     <div data-testid="playground-api-docs">
-      <div id="playground-req-schema" class="text-base">
-        {/* <Box content={responseSchema()} /> */}
-        <Box content={sampleRequest} />
-      </div>
-      <div id="playground-res-schema" class="text-base">
-        <Box content={sampleResponse} />
-      </div>
+      <span>{send()?.loading && "Loading..."}</span>
+
+      <Switch>
+        <Match when={!send.loading}>
+          <div id="playground-req-schema" class="text-base">
+            <Box content={send()} />
+          </div>
+        </Match>
+      </Switch>
+
+      <Switch>
+        <Match when={!receive.loading}>
+          <div id="playground-res-schema" class="text-base">
+            <Box content={receive()} />
+          </div>
+        </Match>
+      </Switch>
     </div>
   );
 };
