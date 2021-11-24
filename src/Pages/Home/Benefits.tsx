@@ -9,8 +9,7 @@ const Benefits = () => (
         <h1 class="text-black text-center text-5xl font-bold m-4">
             Benefits of using Deriv API
         </h1>
-        <div class="flex justify-center mb-20">
- 
+        <div class="flex justify-around mb-20 ">
             <div class="text-black text-2xl">
                 <img width="72" height="72" src={automationsvg} />
                 Automation
