@@ -1,6 +1,7 @@
 import type { Component } from 'solid-js';
 import { ApiSelector } from './components/ApiSelector';
 import { Authenticate } from './components/Authenticate';
+import { Conversation } from './components/Conversation';
 
 export const Playground: Component = () => (
     <div data-testid="playground-page" class="text-base bg-dark-100 text-white">
@@ -10,6 +11,7 @@ export const Playground: Component = () => (
             <div>
                 <ApiSelector />
                 <Authenticate />
+                <Conversation />
             </div>
 
             <div class="">
