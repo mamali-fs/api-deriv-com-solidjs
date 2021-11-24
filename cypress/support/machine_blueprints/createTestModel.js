@@ -1,4 +1,4 @@
-import { createMachine } from 'xstate';
+import { createMachine } from "xstate";
 import { createModel } from "@xstate/test";
 
 function addTests(state, tests) {
@@ -18,7 +18,7 @@ function addTests(state, tests) {
     }, {})
   };
 }
-export const createTestModel = (machine, stateTests, eventTests) => {
+  export const createTestModel = (machine, stateTests, eventTests) => {
   const modelMachine = createMachine(addTests(machine, stateTests));
   const model = createModel(modelMachine, { events: eventTests });
   return model;
