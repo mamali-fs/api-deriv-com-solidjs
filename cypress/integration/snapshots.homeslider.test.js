@@ -1,11 +1,8 @@
-import { homeSliderTestsModel, homeSliderMobileTestsModel } from "./cypressStates";
-import { itTests } from "./itVisitsAndRunsPathTests";
-
 context("Snapshots", () => {
-const testPlans = homeSliderTestsModel().getSimplePathPlans();
+const testPlans = cy.homeSliderTestsModel().getSimplePathPlans();
     testPlans.forEach((plan) => {
             describe(plan.description, () => {
-            plan.paths.forEach(itTests('/'));
+            plan.paths.forEach(cy.itTests('/'));
             afterEach(() => {
                 cy.get("[aria-label='slider-component']").matchImageSnapshot();
             });
@@ -14,7 +11,7 @@ const testPlans = homeSliderTestsModel().getSimplePathPlans();
 });
 
 context("Snapshots mobile", () => {
-const testPlans = homeSliderTestsModel().getShortestPathPlans();
+const testPlans = cy.homeSliderTestsModel().getShortestPathPlans();
     beforeEach(() => {
         // run these tests as if in a mobile browser
         // and ensure our responsive UI is correct
@@ -22,7 +19,7 @@ const testPlans = homeSliderTestsModel().getShortestPathPlans();
     })
     testPlans.forEach((plan) => {
             describe(plan.description, () => {
-            plan.paths.forEach(itTests('/'));
+            plan.paths.forEach(cy.itTests('/'));
             afterEach(() => {
                 cy.get("[aria-label='slider-component']").matchImageSnapshot();
             });

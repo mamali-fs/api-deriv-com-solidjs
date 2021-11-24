@@ -163,6 +163,13 @@ const homeSliderEvents = {
   },
 }
 
-export const testsModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressStates, cypressEvents);
-export const testsMobileModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressMobileStates, cypressMobileEvents);
-export const homeSliderTestsModel = () => createTestModel(homeSliderMachine(), homeSliderStates, homeSliderEvents);
+const itVisitsAndRunsPathTests = (url) => (path) => {
+  it(path.description, function () {
+    cy.visit(url).then(path.test);
+  });
+};
+
+cy.itTests = (appAddress) => itVisitsAndRunsPathTests(appAddress);
+cy.testsModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressStates, cypressEvents);
+cy.testsMobileModel = (initialState) => createTestModel(derivApiMachine(initialState), cypressMobileStates, cypressMobileEvents);
+cy.homeSliderTestsModel = () => createTestModel(homeSliderMachine(), homeSliderStates, homeSliderEvents);
