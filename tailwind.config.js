@@ -3,6 +3,9 @@ module.exports = {
   purge: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    maxHeight: {
+      '60vh': '60vh'
+     },
     fontSize: {
       lg: '1.125rem',
       xl: '1.25rem',

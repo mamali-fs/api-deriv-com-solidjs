@@ -1,7 +1,8 @@
 import type { Component } from "solid-js";
 import { PlaygroundApiDocs } from "./components/playgrounApiDocs";
-import { ApiSelector } from "./components/ApiSelector";
-import { Authenticate } from "./components/Authenticate";
+import { ApiSelector } from './components/ApiSelector';
+import { Authenticate } from './components/Authenticate';
+import { Conversation } from './components/Conversation';
 
 export const Playground: Component = () => (
   <div data-testid="playground-page" class="main-content flex flex-col">
@@ -18,9 +19,8 @@ export const Playground: Component = () => (
             <div class="playground-api-json flex flex-col w-1/2 mobile:w-full  mr-6 bg-dark-100 text-white">
               <ApiSelector />
               <Authenticate />
-
-              <div class="">result part must be here</div>
-            </div>
+              <Conversation /> 
+            </div>      
             <div
               id="playground"
               class="playground-api-docs flex flex-col w-1/2 mobile:w-full bg-dark-100 text-white"
