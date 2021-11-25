@@ -39,21 +39,6 @@ type BoxType = {
   nested?: boolean;
 };
 
-// example consuming code
-interface TReceive {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
-
-interface TSend {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
-
 async function http<T>(
   request: RequestInfo
 ): Promise<T> {
@@ -215,7 +200,6 @@ const Signature: Component<SignatureType> = ({
   buttonClick,
 }) => {
   const [showSignature, setShowSignature] = createSignal(false);
-  const [activeClass, setActiveClass] = createSignal('');
   const strDescription = description?.replace(/(`.`)/g, match => `<code class="bg-[rgba(255,255,255,.16)] text-[#fff] text-[14px] mr-1.5 px-2 py-1.5 font-normal rounded">${match}</code>`)?.replace(/`/g, '');
   const signatureExpand = () => {
     buttonClick();
@@ -280,7 +264,7 @@ const Signature: Component<SignatureType> = ({
               </Match>
               <Match when={type === "object"}>
                 <span
-                  class={`signature-type-object mt-2 mr-2 text-[14px] bg-[#0e0e0e] text-[#9ed178] px-4 py-1.5 rounded  cursor-pointer ${!showSignature() && "bg-[#323738] text-[#ffffff]"
+                  class={`signature-type-object mt-2 mr-2 text-[14px] bg-[#0e0e0e] text-[#9ed178] px-4 py-1.5 rounded  cursor-pointer ${!showSignature() ? "bg-[#323738] text-[#ffffff]" : ""
                     }`}
                   onClick={signatureExpand}
                 >
@@ -364,20 +348,25 @@ const Signature: Component<SignatureType> = ({
           ></p>
         </div>
       </Show>
-      <Show when={items && showSignature()}>
-        <div class="signature-box-container mt-2 clear-both">
-          <div class="sub-box-container bg-[rgba(37,37,37,.4)">
-            <Box content={items} activeClass={activeClass()} />
-          </div>
-        </div>
-      </Show>
-      <Show when={!items && type === "object" && showSignature()}>
-        <div class="signature-box-container mt-2 clear-both">
-          <div class="sub-box-container bg-[rgba(37,37,37,.4)">
-            <Box content={property} nested={true} />
-          </div>
-        </div>
-      </Show>
+      <div class="signature-box-container mt-2 clear-both">
+        <Switch>
+          <Match when={items && showSignature()} >
+            <div class="sub-box-container bg-[rgba(37,37,37,.4)">
+              <Box content={items} activeClass={"active-signature-animate"} />
+            </div>
+          </Match>
+        </Switch>
+
+      </div>
+      <div class="signature-box-container mt-2 clear-both">
+        <Switch>
+          <Match when={!items && type === "object" && showSignature()} >
+            <div class="sub-box-container bg-[rgba(37,37,37,.4)">
+              <Box content={property} nested={true} activeClass={"active-signature-animate"} />
+            </div>
+          </Match>
+        </Switch>
+      </div>
     </div>
   );
 };
