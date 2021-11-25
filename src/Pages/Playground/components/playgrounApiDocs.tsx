@@ -397,7 +397,7 @@ export const PlaygroundApiDocs: Component<{}> = () => {
   })
 
   return (
-    <div data-testid="playground-api-docs">
+    <div data-testid="playground-api-docs mobile:mx-6">
       <Switch>
         <Match when={!send_response_data.loading && !send_response_data.error}>
           <div id="playground-req-schema" class="text-base">
