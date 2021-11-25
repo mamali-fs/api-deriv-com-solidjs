@@ -33,7 +33,7 @@ export const NavigationBar: Component = () => {
         </div>
       </div>
       <header class="h-[73px] w-4/5 mobile:h-[48px] mobile:pl-4 mobile:w-full mobile:flex">
-        <section aria-label="hamburger-dropdown" class="flex items-center">
+        <section aria-label="hamburger" class="flex items-center">
           <img
             role='menu'
             class="desktop:hidden mobile:mr-2.5"
@@ -73,7 +73,8 @@ export const NavigationBar: Component = () => {
         </section>
       </header>
       <section
-        class={`fixed bg-white top-[48px] h-[calc(100%+54px) w-[253px] overflow-hidden left-[-254px] text-base	burger ${
+        aria-label="hamburger-dropdown"
+        class={`fixed bg-white top-[48px] h-[calc(100%+54px) w-[253px] overflow-hidden left-[-254px] text-base burger ${
           showMobileNav() && "transition-left"
         }`}
       >

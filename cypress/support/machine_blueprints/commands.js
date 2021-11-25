@@ -168,29 +168,35 @@ const hamburgerStates = {
   open_hamburger: () => {
     cy.get(`[aria-label="hamburger-dropdown"]`).contains(/api playground/i).should('be.visible')
   },
+  home_active: () => {
+    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)::before`)
+  },
   documentation_closed: () => {
-    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/quickstart/i).should('not.be.visible')
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/quickstart/i).should('not.be.visible')
   },
   documentation_open: () => {
-    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/quickstart/i).should('be.visible')
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/quickstart/i).should('be.visible')
+  },
+  documentation_closed: () => {
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/quickstart/i).should('not.be.visible')
   },
   quickstart: () => {
-    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/quickstart/i).should('be.visible')
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/quickstart/i).should('be.visible')
   },
   app_registration: () => {
-    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/app registration/i).should('be.visible')
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/app registration/i).should('be.visible')
   },
   api_guide: () => {
-    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/api guide/i).should('be.visible')
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/api guide/i).should('be.visible')
   },
   faq: () => {
-    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/faq/i).should('be.visible')
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/faq/i).should('be.visible')
   },
   json_schemas: () => {
-    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/json schemas/i).should('be.visible')
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/json schemas/i).should('be.visible')
   },
   bug_bounty: () => {
-    cy.get(`[aria-label="hamburger-dropdown"] .menu-wrapper > :nth-child(2)`).contains(/bug bounty/i).should('be.visible')
+    cy.get(`[aria-label="hamburger-dropdown"]`).contains(/bug bounty/i).should('be.visible')
   },
   api_playground: () => {
     cy.get(`[aria-label="hamburger-dropdown"]`).contains(/home/i).should('be.visible')
