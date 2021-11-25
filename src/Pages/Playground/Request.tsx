@@ -26,7 +26,7 @@ const Request: Component = ({ resetReqs }) => {
                 className="w-full h-40 bg-gray-900 text-gray-400 resize-none p-2"
             ></textarea>
             <div className="pt-6 flex justify-center items-center">
-                <button onClick={resetReqs} className="px-4	py-2 rounded-md border-2 border-gray-400 text-white mr-1    ">Reset Connection</button>
+                <button onClick={resetReqs} className="px-4	py-2 rounded-md border-2 border-gray-400 text-white mr-1">Reset Connection</button>
                 <button onClick={submit} className="px-4 py-2 rounded-md bg-red-500 border-2 border-red-500 text-white ml-1">Send Request</button>
             </div>
         </section>

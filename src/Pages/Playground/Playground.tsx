@@ -1,6 +1,5 @@
 import type { Component } from 'solid-js';
 import {createEffect, createSignal} from 'solid-js';
-import { createStore } from 'solid-js/store';
 import Request from './Request';
 import WS from '../../Helpers/WS';
 import { Conversation } from './Conversation';
@@ -8,7 +7,7 @@ import { Conversation } from './Conversation';
 export const Playground: Component = () => {
     const [reqs, setReqs] = createSignal([]);
 
-    const addToReqs = (value) => {
+    const addToReqs = (value: string) => {
         return setReqs([...reqs(), value]);
     };
 
