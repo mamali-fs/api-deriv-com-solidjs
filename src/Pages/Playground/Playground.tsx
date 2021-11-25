@@ -38,7 +38,7 @@ export const Playground: Component = () => {
             <div class="">
                 result part must be here
             </div>
-        </div>
+        </main>
     </div>
     )
 }

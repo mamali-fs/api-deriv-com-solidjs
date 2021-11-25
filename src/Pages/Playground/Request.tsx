@@ -14,16 +14,15 @@ const Request: Component = ({ resetReqs }) => {
     }
 
     return (
-        <section className="bg-gray-800 rounded-xl p-4">
-            <label className="text-xs text-gray-400 relative top-4 left-3">Request JSON</label>
+        <section className="rounded p-6 bg-[#151717] my-6">
+            <label className="text-xxs text-white relative top-4 left-3 bg-dark-100">Request JSON</label>
             <textarea 
                 placeholder="Request JSON"
                 value={JSON.stringify(fields.request, null, 2)} 
                 onInput={(e) => {
-                    console.log('e.target.value', e.target.value)
                     setFields("request", JSON.parse(e.target.value))
                 }}
-                className="w-full h-40 bg-gray-900 text-gray-400 resize-none p-2"
+                className="w-full h-40 text-gray-400 resize-none p-2 bg-dark-100"
             ></textarea>
             <div className="pt-6 flex justify-center items-center">
                 <button onClick={resetReqs} className="px-4	py-2 rounded-md border-2 border-gray-400 text-white mr-1">Reset Connection</button>
