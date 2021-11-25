@@ -3,11 +3,11 @@ const socket = new WebSocket(apiURL);
 
 let pushData: (data:string) => void; 
 
+socket.addEventListener('message', handleMessage);
+
 const init = (push: (item:string) => void) => {
     pushData = push;
 }
-
-socket.addEventListener('message', handleMessage);
 
 const waitForOpenSocket = (socket: WebSocket) => (
    new Promise<void>((resolve) => {
@@ -32,7 +32,12 @@ function handleMessage(event: { data: string }) {
   pushData(event.data)
 }
 
+const removeListener = () => {
+  socket.removeEventListener('message', handleMessage)
+}
+
 export default {
   sendMessage,
   init,
+  removeListener,
 };

@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js';
-import {createEffect, createSignal} from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 import Request from './Request';
 import WS from '../../Helpers/WS';
 import { Conversation } from './Conversation';
@@ -22,6 +22,8 @@ export const Playground: Component = () => {
             addToReqs(item)
         });
     });
+
+    onCleanup(WS.removeListener);
 
     return (
       <div data-testid="playground-page" class="text-base bg-dark-100 text-white">
