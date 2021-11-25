@@ -9,9 +9,6 @@ import {
 } from "solid-js";
 import { For, Show, createSignal } from "solid-js";
 
-type PlaygroundApiDocsType = {
-
-};
 
 type SignatureType = {
   property?: any;
@@ -42,15 +39,30 @@ type BoxType = {
   nested?: boolean;
 };
 
-const fetchRecieveData = async (id: string) =>
-  (id && await fetch(`https://api.deriv.com/config/v3/${id}/receive.json`, {
-    mode: 'cors' // 'cors' by default
-  })).json();
+// example consuming code
+interface TReceive {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
 
-const fetchSendData = async (id: string) =>
-  (id && await fetch(`https://api.deriv.com/config/v3/${id}/send.json`, {
-    mode: 'cors' // 'cors' by default
-  })).json();
+interface TSend {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+async function http<T>(
+  request: RequestInfo
+): Promise<T> {
+  const response = await fetch(request);
+  const body = await response.json();
+  return body;
+}
+
+const API_ENDPOINT = "https://api.deriv.com/config/v3/";
 
 const Box: Component<BoxType> = ({ content, activeClass, nested }) => {
   const [showSignatureBox, setShowSignatureBox] = createSignal(false);
@@ -384,32 +396,31 @@ const JsonSchema: Component<JsonSchemaType> = ({ json, mouseHoverFunc }) => {
   );
 };
 
-export const PlaygroundApiDocs: Component<PlaygroundApiDocsType> = () => {
+export const PlaygroundApiDocs: Component<{}> = () => {
   const location = useLocation();
   const [hashLocation, setHashLocation] = createSignal(location.hash)
-
-  const [receive] = createResource(hashLocation, fetchRecieveData);
-  const [send] = createResource(hashLocation, fetchSendData);
+  const fetchRecieveData = async () => await http<any>(`${API_ENDPOINT}${hashLocation()}/receive.json`)
+  const fetchSendData = async () => await http<any>(`${API_ENDPOINT}${hashLocation()}/send.json`)
+  const [receive_response_data] = createResource(hashLocation, fetchRecieveData);
+  const [send_response_data] = createResource(hashLocation, fetchSendData);
   createEffect(() => {
-    setHashLocation(location.hash)
+    location.hash && setHashLocation(location.hash)
   })
 
   return (
     <div data-testid="playground-api-docs">
-      <span>{send()?.loading && "Loading..."}</span>
-
       <Switch>
-        <Match when={!send.loading}>
+        <Match when={!send_response_data.loading && !send_response_data.error}>
           <div id="playground-req-schema" class="text-base">
-            <Box content={send()} />
+            <Box content={send_response_data()} />
           </div>
         </Match>
       </Switch>
 
       <Switch>
-        <Match when={!receive.loading}>
+        <Match when={!receive_response_data.loading && !receive_response_data.error}>
           <div id="playground-res-schema" class="text-base">
-            <Box content={receive()} />
+            <Box content={receive_response_data()} />
           </div>
         </Match>
       </Switch>
