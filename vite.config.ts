@@ -10,6 +10,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
     }),
   ],
+  assetsInclude: ['**/*.txt'],
   build: {
     target: 'esnext',
     polyfillDynamicImport: false,
