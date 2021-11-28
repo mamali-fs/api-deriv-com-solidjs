@@ -13,8 +13,8 @@ export const QuickStart: Component = () => {
           of the most important operations.
         </p>
         <p class="leading-7 mb-4">
-          You can find all of the other available calls in the
-          <a class="text-red-600 no-underline" href="{{ branch }}/playground/">
+          You can find all of the other available calls in the 
+          <a class="text-red-600 no-underline" href="/playground/">
             API Playground
           </a>
           .
@@ -24,14 +24,14 @@ export const QuickStart: Component = () => {
         </h3>
         <ul class="block list-disc ml-5">
           <li class="mb-4 mt-4">
-            Open a
+            Open a 
             <a class="text-red-600 no-underline" href="https://deriv.com/">
               Deriv account
             </a>
             (either a demo or real account).
           </li>
           <li class="mb-4 mt-4">
-            Create a new token using the
+            Create a new token using the 
             <a
               class="text-red-600 no-underline"
               href="https://app.deriv.com/account/api-token"
@@ -95,7 +95,7 @@ export const QuickStart: Component = () => {
         </p>
         <p class="leading-7 mb-4">
           To keep this connection alive in case of inactivity timeouts, see the
-          example for
+          example for 
           <a
             class="text-red-600 no-underline"
             href="https://app.deriv.com/account/api-token"
