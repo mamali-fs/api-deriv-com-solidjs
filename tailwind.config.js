@@ -26,7 +26,15 @@ module.exports = {
         documentation: '220px 1fr',
       },
       colors: {
+        "white": "#ffffff",
         "white-gray": "#c2c2c2",
+        "light-gray": "#a9a9a9",
+        "gray": "#252525",
+        "dark-gray": "#323738",
+        "light-blue": "#85acb0",
+        "gray-blue" : "#272f2f",
+        "light-green": "#9ed178",
+        "dark-gray-1" : "#1b1c1c",
         "dark-100": "#0e0e0e",
         "gray-rgba": 'rgba(37, 37, 37, 0.72)',
         'gray-darkest': '#333333'

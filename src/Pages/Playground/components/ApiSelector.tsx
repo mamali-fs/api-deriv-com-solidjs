@@ -9,7 +9,6 @@ interface IData {
 export const ApiSelector: Component = () => {
     let searchInput: any;
     const data = v3.groups.methods;
-
     const [openDropDown, setOpenDropDown] = createSignal(false);
     const [selectedItem, setSelectedItem] = createSignal<IData>({ name: '', title: '' });
     const [filterData, setFilterData] = createSignal(data);
@@ -62,6 +61,7 @@ export const ApiSelector: Component = () => {
                                         onClick={() => {
                                             setSelectedItem(item);
                                             setOpenDropDown(false);
+                                            window.location.hash = item.name;
                                         }}>
                                         {item.title}
                                     </li>
