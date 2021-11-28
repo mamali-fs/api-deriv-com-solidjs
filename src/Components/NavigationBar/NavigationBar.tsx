@@ -50,7 +50,7 @@ export const NavigationBar: Component = () => {
               width="180"
               alt="Deriv Logo"
             />
-            <h1 class="inline ml-6 text-2xl  mobile:text-base mobile:ml-2">
+            <h1 class="inline ml-6 text-2xl mobile:text-base mobile:ml-2 font-normal text-white mb-0">
               API
             </h1>
           </NavLink>

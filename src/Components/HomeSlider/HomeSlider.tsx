@@ -36,14 +36,14 @@ export const HomeSlider: Component = () => {
     const slider_options: TSliderOptions = { loop: true }
     const [slider, { next, prev }] = createSlider(slider_options);
     return (
-        <div class="flex flex-col items-center">
+        <div aria-label="slider-component" class="flex flex-col items-center">
             <h1 class="mb-10 text-5xl">See what our clients say</h1>
             <div class="w-[80%] flex justify-center items-center">
-                <div class="flex flex-col justify-center align-middle items-center desktop:mr-[100px] mobile:mr-[50px] bg-arrow-left bg-no-repeat w-[50px] h-[50px]" onclick={prev} />
-                <div use:slider class="w-[588px] h-[248px]">
+                <div role="button" aria-label="left" class="flex flex-col justify-center align-middle items-center desktop:mr-[100px] mobile:mr-[50px] bg-arrow-left bg-no-repeat w-[50px] h-[50px]" onclick={prev} />
+                <div role="slider" aria-label="home" use:slider class="hover:cursor-pointer w-[588px] h-[248px]">
                     <For each={SLIDER_CONTENT}>
                         {(person) =>
-                            <div class="flex flex-col justify-center items-center">
+                            <div aria-label="slider-content" class="flex flex-col justify-center items-center">
                                 <blockquote class="mb-10">
                                     {person.message}
                                 </blockquote>
@@ -52,7 +52,7 @@ export const HomeSlider: Component = () => {
                         }
                     </For>
                 </div>
-                <div class="flex flex-col justify-center items-center desktop:ml-[100px] mobile:ml-[50px] w-[50px] h-[50px] bg-arrow-right bg-no-repeat" onclick={next} />
+                <div role="button" aria-label="right" class="flex flex-col justify-center items-center desktop:ml-[100px] mobile:ml-[50px] w-[50px] h-[50px] bg-arrow-right bg-no-repeat" onclick={next} />
 
             </div>
         </div>
