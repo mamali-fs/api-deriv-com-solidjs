@@ -12,7 +12,7 @@ export const Docs: Component = () => {
   })
 
   return (
-    <div class="grid grid-cols-documentation gap-2 h-screen mobile:hidden pt-20 mx-auto max-w-screen-xl">
+    <div style={{ "padding-top": "105px" }} class="grid grid-cols-documentation gap-2 h-screen mobile:hidden mx-auto w-4/5">
         <SideBar />
           <Switch fallback={<div>...</div>}>
             <Match when={pathname() === '/docs/'}>
