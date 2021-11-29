@@ -26,9 +26,9 @@ export const QuickStart: Component = () => {
           <li class="mb-4 mt-4">
             Open a 
             <a class="text-red-600 no-underline" href="https://deriv.com/">
-              Deriv account
-            </a>
-            (either a demo or real account).
+              Deriv account 
+            </a> 
+             (either a demo or real account).
           </li>
           <li class="mb-4 mt-4">
             Create a new token using the 

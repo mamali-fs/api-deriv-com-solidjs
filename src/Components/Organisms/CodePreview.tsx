@@ -104,15 +104,15 @@ export function CodePreview({ apiType }: TProps): JSX.Element {
   };
 
   return (
-    <div class="rounded-md bg-gray-900">
-      <div class="flex flex-no-wrap items-center rounded-md bg-black text-gray-400 leading-normal border-b-2 border-solid border-gray-600">
+    <div class="rounded-md bg-dark-gray-1">
+      <div class="flex flex-no-wrap items-center rounded-md bg-black text-white-gray leading-normal border-b-2 border-solid border-white-gray">
         <div class="w-full pl-6">
           <CodeLanguageDropdown
             value={codePreviewStore[apiType].selected}
             onChange={handleDefaultValueChange}
           />
         </div>
-        <div class="flex items-center justify-end text-gray-400 border-l-2 border-solid border-gray-600 px-6 py-1 cursor-pointer">
+        <div class="flex items-center justify-end text-white-gray border-l-2 border-solid border-white-gray px-6 py-1 cursor-pointer">
           <img
             class="mt-0 mr-2 mb-0 ml-1"
             src="https://api.deriv.com/img/copy.svg"
@@ -123,7 +123,7 @@ export function CodePreview({ apiType }: TProps): JSX.Element {
           Copy
         </div>
       </div>
-      <div>
+      <div class="bg-gray-900">
         <pre class="max-w-full overflow-auto whitespace-pre-wrap text-white block rounded p-6 mb-4 1 break-words">
           <CodeBlock store={codePreviewStore[apiType]} />
         </pre>
