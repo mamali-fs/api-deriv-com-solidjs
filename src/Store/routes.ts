@@ -40,12 +40,12 @@ export const routes: any[] = [
       {
         label: 'JSON schemas',
         path: '/json-schemas',
-        component: NotFound,
+        component: lazy(() => import('../Pages/Docs/JSONSchemas')),
       },
       {
         label: 'Bug Bounty',
         path: '/bug-bounty',
-        component: NotFound,
+        component: lazy(() => import('../Pages/Docs/BugBounty')),
       },
     ],
   },
