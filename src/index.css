@@ -260,6 +260,11 @@ div.code {
   }
 }
 
+.faq-page {
+  background-image: url(./assets/pattern-left.svg);
+  background-repeat: no-repeat,no-repeat;
+  z-index: 0;
+}
 .hljs {
   color: #24292e;
   background: rgba(17, 24, 39, 1) !important;
