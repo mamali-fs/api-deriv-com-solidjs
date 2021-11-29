@@ -4,26 +4,30 @@ export const AppRegistration = (): JSX.Element => {
   return (
     <div class="page-content">
       <h1>App registration</h1>
-      <h4>
-        Authenticate your API token before using it in your app.
-      </h4>
+      <h4>Authenticate your API token before using it in your app.</h4>
       <LookingForAPI />
       <fieldset id="api-token-fieldset">
-        <div class="api-token-wrapper">
+        <div class="api-token-wrapper flex items-center justify-center relative w-full">
           <p class="helper-label">API Token</p>
-          <input type="text" id="api-token" placeholder="API Token" />
+          <input
+            type="text"
+            id="api-token"
+            placeholder="API Token"
+            class="api-token block w-full border-solid border border-superlight-gray h-10 text-sm py-0 px-3"
+          />
           <button id="send-auth-manually-btn" class="btn-authenticate bold">
             Authenticate
           </button>
         </div>
       </fieldset>
       <div class="horizontal-separator-grey"></div>
-      <form id="frmNewApplication">
-        <div class="form-content">
+      <form
+        id="frmNewApplication"
+        class="w-full flex flex-col justify-start items-center"
+      >
+        <div class="form-content w-[80%]">
           <fieldset>
-            <h2 id="form-title" class="doc-sub-title">
-              Register your app
-            </h2>
+            <h3>Register your app</h3>
             <div class="input-wrapper first">
               <p class="helper-label">Name (Required)</p>
               <input
@@ -101,7 +105,7 @@ export const AppRegistration = (): JSX.Element => {
             </div>
           </fieldset>
           <div class="scopes">
-            <p class="bold scopes-field">Scopes:</p>
+            <h6 class="font-bold">Scopes:</h6>
             <div class="scopes-field">
               <input id="read-scope" type="checkbox" value="read" />
               <label for="read-scope">Read: View account activity</label>
@@ -133,7 +137,10 @@ export const AppRegistration = (): JSX.Element => {
               </label>
             </div>
           </div>
-          <button class="primary-btn-submit" id="btnRegister">
+          <button
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-auto"
+            id="btnRegister"
+          >
             Register
           </button>
         </div>
