@@ -150,6 +150,15 @@ div.code {
     -webkit-animation-duration: .5s;
     -webkit-animation-fill-mode: forwards;
   }
+
+  .btn-secondary {
+    @apply rounded border-solid border-2 font-bold text-sm py-2 px-4 text-center text-gray-darkest w-auto inline-block;
+    border-color: rgba(153, 153, 153, 1);
+    letter-spacing: normal;
+  }
+  .page-content {
+    @apply pl-12;
+  }
 }
 
 .hljs {
@@ -163,11 +172,15 @@ div.code {
   }
 
   h1 {
-    @apply text-5xl mb-2 text-center font-bold;
+    @apply text-5xl mb-10 text-center font-bold; 
+  }
+
+  h4 {
+    @apply text-2xl leading-normal mb-10 text-center text-gray-darkest;
   }
 
   h3 {
-    @apply text-2xl mb-2 font-bold;
+    @apply text-2xl mb-4 font-bold;
   }
 
   p {
