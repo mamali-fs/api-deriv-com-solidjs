@@ -1,23 +1,21 @@
 /* ./src/index.css */
 @keyframes grow {
   from {
-    transform: translate(-100%,-100%);
+    transform: translate(-100%, -100%);
   }
 
   to {
-    transform: translate(0,0);
-    
+    transform: translate(0, 0);
   }
 }
 
 @-webkit-keyframes grow {
   from {
-    transform: translate(-100%,-100%);
-
+    transform: translate(-100%, -100%);
   }
 
   to {
-    transform: translate(0,0);
+    transform: translate(0, 0);
   }
 }
 
@@ -84,13 +82,16 @@ div.code {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }
+  .api-token {
+    max-width: calc(80% - 150px);
+  }
 
   .sub-box-container .box {
     margin-bottom: unset;
   }
 
   .sub-box-container .box-body {
-    background-color: rgba(37, 37, 37, .4);
+    background-color: rgba(37, 37, 37, 0.4);
   }
 
   .box-body {
@@ -145,29 +146,105 @@ div.code {
     overflow: hidden;
     animation-name: grow;
     animation-fill-mode: forwards;
-    animation-duration: .5s;
+    animation-duration: 0.5s;
     -webkit-animation-name: grow;
-    -webkit-animation-duration: .5s;
+    -webkit-animation-duration: 0.5s;
     -webkit-animation-fill-mode: forwards;
+  }
+
+  .btn-secondary {
+    @apply rounded border-solid border-2 font-bold text-sm py-2 px-4 text-center text-gray-darkest w-auto inline-block;
+    border-color: rgba(153, 153, 153, 1);
+    letter-spacing: normal;
+  }
+
+  .scopes-field {
+    @apply flex flex-row items-center justify-self-center mb-4 w-full;
+  }
+
+  .scopes-field input {
+    @apply mr-4;
+  }
+
+  .page-content {
+    @apply pl-12;
+  }
+
+  .input-wrapper .helper-label {
+    @apply bg-white text-xs mb-0 p-1 absolute;
+    left: 0.5vw;
+    top: -12px;
+    line-height: 1.4;
+    color: rgba(51, 51, 51, 1);
+  }
+
+  .page-content #api-token-fieldset .api-token-wrapper {
+    @apply flex items-center justify-center relative w-full;
+  }
+  .page-content #api-token-fieldset {
+    @apply mb-10;
+  }
+  .page-content #api-token-fieldset .api-token-wrapper .helper-label {
+    @apply bg-white text-xs mb-0 p-1 absolute;
+    left: 7vw;
+    top: -12px;
+    line-height: 1.4;
+    color: rgba(51, 51, 51, 1);
+  }
+  .btn-authenticate {
+    @apply h-10 text-sm py-2 px-4 text-white w-32;
+    border-radius: 0 4px 4px 0;
+    background-color: rgba(255, 68, 79, 1);
+    line-height: 1.43;
+  }
+
+  fieldset .input-wrapper {
+    @apply flex flex-wrap items-center justify-center mb-4 relative;
+  }
+
+  /* ℹ️ Base selector: .input-wrapper input */
+  /* ✨ TailwindCSS: "rounded border-solid border h-10 text-sm mb-6 py-0 px-3 w-full" */
+  /* ⚠️ Some properties could not be matched with Tailwind classes. Use @apply to extend a CSS rule: */
+  .input-wrapper input {
+    @apply rounded border-solid border h-10 text-sm mb-6 py-0 px-3 w-full;
+    border-color: rgba(214, 218, 219, 1);
+    line-height: 1.43;
+    color: rgba(51, 51, 51, 1);
+  }
+
+  .form-content fieldset .helper-text {
+    @apply text-xs leading-normal pl-3 w-full;
+    color: rgba(153, 153, 153, 1);
+  }
+  .form-content fieldset .last {
+    @apply mb-0;
   }
 }
 
-.hljs {
-  color: #24292e;
-  background: rgba(17, 24, 39, 1) !important;
-}
-
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply text-gray-darkest;
   }
 
   h1 {
-    @apply text-5xl mb-2 text-center font-bold;
+    @apply text-5xl mb-10 text-center font-bold;
   }
 
   h3 {
-    @apply text-2xl mb-2 font-bold;
+    @apply text-4xl mb-8 font-bold;
+  }
+
+  h4 {
+    @apply text-2xl leading-normal mb-10 text-center text-gray-darkest;
+  }
+
+  h3 {
+    @apply text-2xl mb-4 font-bold;
   }
 
   p {
@@ -181,4 +258,9 @@ div.code {
   li {
     @apply mb-4 mt-4 list-item list-disc;
   }
+}
+
+.hljs {
+  color: #24292e;
+  background: rgba(17, 24, 39, 1) !important;
 }
