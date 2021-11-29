@@ -49,12 +49,16 @@ async function http<T>(
 
 const API_ENDPOINT = "https://api.deriv.com/config/v3/";
 
+const descriptionMaker = (description:string) => {
+  const newDescription = (" " + description?.trim()).replace(/(?<=\s\`)(.*?)(?=`)/g, (match) => `<code class="bg-[rgba(255,255,255,.16)] text-[#fff] text-[14px] mr-1.5 px-2 py-1.5 font-normal rounded">${match}</code>`)?.replace(/`/g, '');
+  return newDescription;
+}
+
 const Box: Component<BoxType> = ({ content, activeClass, nested }) => {
   const [showSignatureBox, setShowSignatureBox] = createSignal(false);
   const [showSourceButton, setShowSourceButton] = createSignal(false);
 
-  console.log("content", content)
-  const strDescription = content?.description?.replace(/(`.`)/g, (match: string) => `<code class="bg-[rgba(255,255,255,.16)] text-[#fff] text-[14px] mr-1.5 px-2 py-1.5 font-normal rounded">${match}</code>`)?.replace(/`/g, '');
+  const strDescription = descriptionMaker(content?.description);
 
   let expand_ref: any, source_ref: any;
 
@@ -199,8 +203,10 @@ const Signature: Component<SignatureType> = ({
   additionalProperties,
   buttonClick,
 }) => {
+  
+  const strDescription = descriptionMaker(description);
   const [showSignature, setShowSignature] = createSignal(false);
-  const strDescription = description?.replace(/(`.`)/g, match => `<code class="bg-[rgba(255,255,255,.16)] text-[#fff] text-[14px] mr-1.5 px-2 py-1.5 font-normal rounded">${match}</code>`)?.replace(/`/g, '');
+
   const signatureExpand = () => {
     buttonClick();
     setShowSignature(!showSignature());
@@ -334,9 +340,21 @@ const Signature: Component<SignatureType> = ({
             <span class="type-keyword default text-[#c2c2c2] text-[14px] mt-2 mr-2">
               Example:
             </span>
-            <code class="type-default text-[#ffffff] text-[16px] border border-solid rounded border-[#eaeced] py-0.5 px-1 font-bold">
-              {examples}
-            </code>
+            
+            <Show when={Array.isArray(examples)}>
+              <For each={examples}>
+                {(example: Array<string>) => (
+                  <code class="type-default text-[#ffffff] text-[16px] border border-solid rounded border-[#eaeced] py-0.5 px-1 font-bold">
+                    {example}
+                  </code>
+                )}
+              </For>
+            </Show>
+            <Show when={!Array.isArray(examples)}>
+              <code class="type-default text-[#ffffff] text-[16px] border border-solid rounded border-[#eaeced] py-0.5 px-1 font-bold">
+                {examples}
+              </code>
+            </Show>
           </Show>
         </div>
       </div>
