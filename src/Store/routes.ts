@@ -4,7 +4,7 @@ import { TNavigation } from "./side-bar-store";
 const NotFound = lazy(() => import("../Pages/NotFound"));
 
 
-export const routes: TNavigation[] = [
+export const routes: any[] = [
   {
     label: 'Home',
     path: '/',

@@ -36,6 +36,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 div.code {
   white-space: pre;
 }
@@ -149,6 +150,11 @@ div.code {
     -webkit-animation-duration: .5s;
     -webkit-animation-fill-mode: forwards;
   }
+}
+
+.hljs {
+  color: #24292e;
+  background: rgba(17, 24, 39, 1) !important;
 }
 
 @layer base {
