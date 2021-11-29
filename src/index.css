@@ -182,3 +182,9 @@ div.code {
     @apply mb-4 mt-4 list-item list-disc;
   }
 }
+
+.faq-page {
+  background-image: url(./assets/pattern-left.svg);
+  background-repeat: no-repeat,no-repeat;
+  z-index: 0;
+}
