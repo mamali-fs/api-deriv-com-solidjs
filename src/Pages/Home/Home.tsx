@@ -1,6 +1,7 @@
 import type { Component } from 'solid-js'
 import HomeSlider from '../../Components/HomeSlider';
 import ComprehensiveRow from './ComprehensiveRow';
+import Community from './Community';
 import Hero from './Hero';
 import Benefits from './Benefits';
 import WaysToEarn from './WaysToEarn'
@@ -12,5 +13,6 @@ export const Home: Component = () => (
         <WaysToEarn />
         <HomeSlider />
         <ComprehensiveRow />
+        <Community />
     </div>
 )
