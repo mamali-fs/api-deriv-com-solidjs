@@ -114,6 +114,44 @@ div.code {
     border-bottom-left-radius: 4px;
   }
 
+  .single-container {
+    @apply mobile:single-container-mobile flex flex-col flex-wrap align-middle justify-center text-center w-4/5;
+    height: 150px;
+  }
+
+  .single-container-mobile {
+    width: unset;
+    padding: 40px 16px 0;
+  }
+  .community-container {
+    background-color: #0e0e0e;  
+  }
+
+  .text-h2-community {
+    @apply mobile:text-h2-community-mobile desktop:text-h2-community-desktop text-white mb-2 font-bold;
+    font-family: ibm plex sans,sans-serif;
+  }
+
+  .text-h2-community-desktop {
+    font-size: 26px;
+  }
+
+  .text-h2-community-mobile {
+    font-size: 20px;
+  }
+
+  .community-btn {
+    color: white !important;
+    padding: 6px 16px;
+    border: 1px solid gray;
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  .community-mail {
+    color: #EF4444;
+  }
+
   .main-page-card-mobile {
     max-width: 360px;
   }
@@ -121,6 +159,10 @@ div.code {
   .main-page-row {
     height: fit-content;
     padding: 80px 0;
+  }
+
+  .min-h-52 {
+    min-height: 13rem;
   }
 
   .mb-30px {
@@ -131,8 +173,18 @@ div.code {
     color: #333;
   }
 
+  .text-community {
+    @apply text-base;
+    font-size: 13px;
+    color: #c2c2c2;
+  }
+
   .w-9\/10 {
     width: 90%;
+  }
+
+  .padding-bottom-footer {
+    padding-bottom: 56px;
   }
 
   .ways {
