@@ -20,6 +20,6 @@ export const Docs: Component = () => {
           </Match>
         </Switch>
       </Router>
-    </div>
+      </div>
   );
 };
