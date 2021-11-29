@@ -6,7 +6,7 @@ import { For } from "solid-js";
 export const SideBar: Component = () => {
   const [navs, _] = docsNavSignal;
   return (
-    <div class="flex flex-col pl-4 border-white-gray border-r-2">
+    <div class="flex flex-col pl-4  border-r-2 border-white-gray border-opacity-20">
       <div class="flex flex-col relative w-full">
         <p class="flex relative justify-start items-center text-4xl mb-6 ml-1 font-bold text-gray-800">
           Deriv API
