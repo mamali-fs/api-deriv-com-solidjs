@@ -13,44 +13,46 @@ export const routes: TNavigation[] = [
   },
   {
     label: 'Documentation',
-    path: '/docs',
+    path: '/docs/',
     is_root_path: true,
     component: lazy(() => import('../Pages/Docs')),
+    children: [
+      {
+        label: 'Quickstart',
+        path: '/',
+        component: lazy(() => import('../Pages/Docs/QuickStart')),
+      },
+      {
+        label: 'App registration',
+        path: '/app-registration',
+        component: lazy(() => import('../Pages/Docs/AppRegistration')),
+      },
+      {
+        label: 'API guide',
+        path: '/api-guide',
+        component: NotFound,
+      },
+      {
+        label: 'FAQ',
+        path: '/faq',
+        component: NotFound,
+      },
+      {
+        label: 'JSON schemas',
+        path: '/json-schemas',
+        component: NotFound,
+      },
+      {
+        label: 'Bug Bounty',
+        path: '/bug-bounty',
+        component: NotFound,
+      },
+    ],
   },
   {
     label: 'API Playground',
     path: '/playground',
     is_root_path: true,
     component: lazy(() => import('../Pages/Playground')),
-  },
-  {
-    label: 'Quickstart',
-    path: '/docs',
-    component: lazy(() => import('../Pages/Docs/QuickStart')),
-  },
-  {
-    label: 'App registration',
-    path: '/docs/app-registration',
-    component: NotFound,
-  },
-  {
-    label: 'API guide',
-    path: '/docs/api-guide',
-    component: NotFound,
-  },
-  {
-    label: 'FAQ',
-    path: '/docs/faq',
-    component: NotFound,
-  },
-  {
-    label: 'JSON schemas',
-    path: '/docs/json-schemas',
-    component: NotFound,
-  },
-  {
-    label: 'Bug Bounty',
-    path: '/docs/bug-bounty',
-    component: NotFound,
   },
 ];

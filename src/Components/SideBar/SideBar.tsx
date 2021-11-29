@@ -17,7 +17,7 @@ export const SideBar: Component = () => {
               data-index={index}
               activeClass="before:sidebar before:bg-red-600 bg-gray-100 font-bold text-black"
               class="flex relative justify-start items-center py-2.5 pr-4 pl-4 mb-4 text-base rounded-l-md h-11 text-gray-500 hover:bg-gray-100 hover:before:sidebar hover:before:bg-red-100"
-              href={item.path}
+              href={`/docs${item.path}`}
               end
             >
               {item.label}

@@ -1,25 +1,26 @@
-import { Component, createMemo, Match, Switch } from "solid-js";
-import { Outlet, Router, useLocation } from "solid-app-router";
+import { Component, createEffect, createMemo, Match, Switch } from "solid-js";
+import { Outlet, Router, useLocation, useMatch } from "solid-app-router";
 import SideBar from "../../Components/SideBar";
 import QuickStart from "./QuickStart";
 
 export const Docs: Component = () => {
   const location = useLocation();
-  const is_root = createMemo(() => location.pathname === '/docs');
-  
+  const pathname = createMemo(() => location.pathname);
+  createEffect(() => {
+    console.log(pathname())
+  })
+
   return (
     <div class="grid grid-cols-documentation gap-2 h-screen mobile:hidden pt-20 mx-auto max-w-screen-xl">
-      <Router>
         <SideBar />
         <Switch fallback={<div>...</div>}>
-          <Match when={is_root}>
+          <Match when={pathname() === '/docs/'}>
             <QuickStart />
           </Match>
-          <Match when={!is_root}>
-            <Outlet />
+          <Match when={pathname() !== '/docs/'}>
+            <Outlet/>
           </Match>
         </Switch>
-      </Router>
     </div>
   );
 };
