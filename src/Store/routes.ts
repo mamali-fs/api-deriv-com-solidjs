@@ -30,7 +30,7 @@ export const routes: any[] = [
       {
         label: 'API guide',
         path: '/api-guide',
-        component: NotFound,
+        component: lazy(() => import("../Pages/Docs/ApiGuide")),
       },
       {
         label: 'FAQ',
@@ -40,7 +40,7 @@ export const routes: any[] = [
       {
         label: 'JSON schemas',
         path: '/json-schemas',
-        component: NotFound,
+        component: lazy(() => import('../Pages/Docs/JSONSchemas')),
       },
       {
         label: 'Bug Bounty',

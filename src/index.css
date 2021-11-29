@@ -1,23 +1,23 @@
 /* ./src/index.css */
 @keyframes grow {
   from {
-    transform: translate(-100%,-100%);
+    transform: translate(-100%, -100%);
   }
 
   to {
-    transform: translate(0,0);
-    
+    transform: translate(0, 0);
+
   }
 }
 
 @-webkit-keyframes grow {
   from {
-    transform: translate(-100%,-100%);
+    transform: translate(-100%, -100%);
 
   }
 
   to {
-    transform: translate(0,0);
+    transform: translate(0, 0);
   }
 }
 
@@ -141,6 +141,7 @@ div.code {
     box-shadow: 0 4px 8px 0 rgb(14 14 14 / 10%);
     background-color: #fff;
   }
+
   .active-signature-animate {
     overflow: hidden;
     animation-name: grow;
@@ -180,5 +181,10 @@ div.code {
 
   li {
     @apply mb-4 mt-4 list-item list-disc;
+  }
+
+  a[target=_blank] {
+    @apply text-red-500 no-underline;
+
   }
 }
