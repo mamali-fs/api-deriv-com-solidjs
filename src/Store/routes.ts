@@ -45,7 +45,7 @@ export const routes: any[] = [
       {
         label: 'Bug Bounty',
         path: '/bug-bounty',
-        component: NotFound,
+        component: lazy(() => import('../Pages/Docs/BugBounty')),
       },
     ],
   },

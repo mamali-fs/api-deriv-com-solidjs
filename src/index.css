@@ -181,8 +181,4 @@ div.code {
   li {
     @apply mb-4 mt-4 list-item list-disc;
   }
-
-  a[target=_blank] {
-    @apply text-red-500;
-  }
 }
