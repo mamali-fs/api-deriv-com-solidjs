@@ -3,7 +3,7 @@ import { PlaygroundApiDocs } from "./components/playgrounApiDocs";
 import { createEffect, createSignal, onCleanup } from "solid-js";
 import Request from "./Request";
 import WS from "../../Helpers/WS";
-import { Conversation } from "./Conversation";
+import { Conversation } from "./components/Conversation";
 import { ApiSelector } from "./components/ApiSelector";
 import { Authenticate } from "./components/Authenticate";
 
