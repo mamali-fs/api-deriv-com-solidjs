@@ -16,21 +16,25 @@
  * @type {Cypress.PluginConfig}
  */
 
- const {
+const {
   addMatchImageSnapshotPlugin,
 } = require('cypress-image-snapshot/plugin');
 
- const { lighthouse, pa11y, prepareAudit } = require("cypress-audit");
+const { lighthouse, pa11y, prepareAudit } = require('cypress-audit');
 
- module.exports = (on, config) => {
-  on("before:browser:launch", (browser = {}, launchOptions) => {
+module.exports = (on, config) => {
+  require('@cypress/code-coverage/task')(on, config);
+
+  on('before:browser:launch', (browser = {}, launchOptions) => {
     prepareAudit(launchOptions);
   });
 
-  on("task", {
+  on('task', {
     lighthouse: lighthouse(), // calling the function is important
     pa11y: pa11y(), // calling the function is important
   });
 
   addMatchImageSnapshotPlugin(on, config);
+
+  return config;
 };
